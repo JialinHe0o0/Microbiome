@@ -1,6 +1,7 @@
 # diversity-code
 
 \# color最好还是自定义
+
 \# metadata的row.names必须为sample ID，且必须与microdat对应
 
 - α多样性
