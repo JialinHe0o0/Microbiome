@@ -16,9 +16,9 @@ example:
 
 res <- shannon_index(microdat = microdat, metadata = metadata, group = 'DM', sample_in_row = T, p.adj = T, title = 'Bacterial')
 
-# 返回sample ID与shannon index的表格
+\# 返回sample ID与shannon index的表格
 res$data
 
-# 返回ggplot图
+\# 返回ggplot图
 res$plot
 
