@@ -30,7 +30,6 @@ shannon_index <- function(microdat,metadata,group,sample_in_row,p.adj,title){
   }
   
   if(len==2){
-    ## 两组比较 ----
     
     stat.test <- compare_means(shannon~group_in_function,
                                p.adjust.method = 'BH',
@@ -109,3 +108,4 @@ shannon_index <- function(microdat,metadata,group,sample_in_row,p.adj,title){
   list <- list(data=shannon,plot=shannon_plot)
   return(list)
 }
+
