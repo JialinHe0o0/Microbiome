@@ -2,7 +2,9 @@
 
 \# color最好还是自定义
 
-\# metadata的row.names必须为sample ID，且必须与microdat对应
+\# metadata的row.names必须为sample ID
+
+\# microdat的sample ID、OTU/Species/Genus...必须是行或列名
 
 - α多样性
 
@@ -52,6 +54,8 @@ res$plot
 > title = 图标题，可以为空
 
 > color = ，可以为空
+
+> seed = ,可以为空
 
 
 
