@@ -1,0 +1,128 @@
+
+PCOA_plot <- function(microdat,metadata,group,sample_in_row,title=NULL){
+  library(tidyverse)
+  library(stringr)
+  library(ggpubr)
+  library(vegan)
+  library(car)
+  library(ggthemes)
+  
+  if(sample_in_row == F){
+    microdat <- t(microdat) %>% as.data.frame()
+  }
+
+  colnames(metadata)[colnames(metadata)==group] <- 'group_in_function'
+  
+  # calculate P value
+  adonis_microdat <- adonis2(microdat~group_in_function,
+                             data = metadata,
+                             distance = 'bray', permutations = 999)
+  
+  # PCOA
+  
+  # bray matrix
+  pcoa_dis <- vegdist(microdat, method = 'bray')
+  
+  pcoa <- cmdscale(pcoa_dis, k = (nrow(microdat) - 1), eig = TRUE)
+  
+  pcoa_exp <- pcoa$eig/sum(pcoa$eig)
+  pcoa1 <- paste('PCoA1 :', round(100*pcoa_exp[1], 2), '%')
+  pcoa2 <- paste('PCoA2 :', round(100*pcoa_exp[2], 2), '%')
+  
+  site <- data.frame(pcoa$point)[1:2]
+  site <- cbind.data.frame(site,metadata)
+  names(site)[1:2] <- c('pcoa1', 'pcoa2')
+  
+  group_average <- aggregate(cbind(pcoa1, pcoa2)~group_in_function, 
+                             data = site, FUN = mean)
+  
+  
+  color <- c('#93b1b3','#324960','#dc8f75','#e4b687','#b65949','#786a6a')
+
+  eli <- dataEllipse(x = site$pcoa1,y = site$pcoa2,levels = 0.95,draw = F) %>% as.data.frame()
+  xmin <- min(eli$x)
+  xmax <- max(eli$x)
+  ymin <- min(eli$y)
+  ymax <- max(eli$y)
+  
+  len <- length(unique(metadata$group_in_function))
+  
+  if(len<2){
+    stop('ERROR: only one level in your group')
+  }else if(len==2){
+    plot <- ggplot(site)+
+      geom_point(aes(x=pcoa1, y=pcoa2,
+                     color = group_in_function),
+                 size = 0.8)+
+      stat_ellipse(aes(x = pcoa1, y = pcoa2, 
+                       color = group_in_function),
+                   level = 0.95, linetype = 2,linewidth = 0.8,
+                   show.legend = FALSE) +
+      geom_point(data = group_average, 
+                 aes(x = pcoa1, y = pcoa2, 
+                     color = group_in_function),
+                 size = 2.2, show.legend = FALSE)+
+      scale_x_continuous(limits = c(xmin-(xmax-xmin)*0.025,
+                                    xmax+(xmax-xmin)*0.025))+
+      scale_y_continuous(limits = c(ymin-(ymax-ymin)*0.025,
+                                    ymax+(ymax-ymin)*0.025))+
+      guides(color=guide_legend(override.aes = list(size=2.5)))+
+      labs(title = title,x = pcoa1,y = pcoa2,color = '')+
+      scale_color_manual(values = color[c(2,3)])+
+      # annotate('text', label = 'PERMANOVA', 
+      #          x = xmax*0.9, y = xmax*0.99, size = 3.6)+
+      annotate('text', label = sprintf('italic(P) == %.3f', 
+                                       adonis_microdat[1,5]), 
+               x = xmax*0.9, y = ymax*0.95, 
+               size = 3.6, parse = TRUE,family = 'serif')+
+      theme_bw()+
+      theme(legend.key = element_blank(),
+            plot.title = element_text(family = "serif",size=12),
+            axis.title.x= element_text(family = "serif",size=12),
+            axis.title.y= element_text(family = "serif",size=12),
+            axis.text.x= element_text(family = "serif",size=12),
+            axis.text.y= element_text(family = "serif",size=12),
+            legend.text = element_text(family = "serif",size=10),
+            axis.ticks.length.x = unit(0.1,'cm'),
+            axis.ticks.length.y = unit(0.1,'cm'),
+            plot.margin = unit(c(0.2,0.2,0.2,0.2),"cm"))
+  }else{
+    plot <- ggplot(site)+
+      geom_point(aes(x=pcoa1, y=pcoa2,
+                     color = group_in_function),
+                 size = 0.8)+
+      stat_ellipse(aes(x = pcoa1, y = pcoa2, 
+                       color = group_in_function),
+                   level = 0.95, linetype = 2,linewidth = 0.8,
+                   show.legend = FALSE) +
+      geom_point(data = group_average, 
+                 aes(x = pcoa1, y = pcoa2, 
+                     color = group_in_function),
+                 size = 2.2, show.legend = FALSE)+
+      scale_x_continuous(limits = c(xmin-(xmax-xmin)*0.025,
+                                    xmax+(xmax-xmin)*0.025))+
+      scale_y_continuous(limits = c(ymin-(ymax-ymin)*0.025,
+                                    ymax+(ymax-ymin)*0.025))+
+      guides(color=guide_legend(override.aes = list(size=2.5)))+
+      labs(title = title,x = pcoa1,y = pcoa2,color = '')+
+      scale_color_manual(values = color[1:len])+
+      # annotate('text', label = 'PERMANOVA', 
+      #          x = xmax*0.9, y = xmax*0.99, size = 3.6)+
+      annotate('text', label = sprintf('italic(P) == %.3f', 
+                                       adonis_microdat[1,5]), 
+               x = xmax*0.9, y = ymax*0.95, 
+               size = 3.6, parse = TRUE,family = 'serif')+
+      theme_bw()+
+      theme(legend.key = element_blank(),
+            plot.title = element_text(family = "serif",size=12),
+            axis.title.x= element_text(family = "serif",size=12),
+            axis.title.y= element_text(family = "serif",size=12),
+            axis.text.x= element_text(family = "serif",size=12),
+            axis.text.y= element_text(family = "serif",size=12),
+            legend.text = element_text(family = "serif",size=10),
+            axis.ticks.length.x = unit(0.1,'cm'),
+            axis.ticks.length.y = unit(0.1,'cm'),
+            plot.margin = unit(c(0.2,0.2,0.2,0.2),"cm"))
+  }
+  return(plot)
+}
