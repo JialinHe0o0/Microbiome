@@ -28,6 +28,8 @@ res$data
 res$plot
 
 
+
+
 - β多样性
 
 1. PCOA_plot()
