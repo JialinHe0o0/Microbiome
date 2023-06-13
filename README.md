@@ -1,6 +1,6 @@
 # Jialin He
 
-# diversity-code
+## diversity-code
 
 \# metadata的row.names必须为sample ID
 
@@ -8,9 +8,9 @@
 
 \# color最好还是自定义
 
-- α多样性
+### α多样性
 
-1. shannon_index()
+- shannon_index()
 
 > microdat = 菌群特征表
 
@@ -40,9 +40,9 @@ res$plot
 
 ----
 
-- β多样性
+### β多样性
 
-1. PCOA_plot()
+- PCOA_plot()
 
 > microdat = 菌群特征表
 
