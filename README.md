@@ -1,6 +1,7 @@
 # diversity-code
 
-\# 因为我自己设置的色盘只有6种颜色，所以最多只能有6个分组
+\# color最好还是自定义
+\# metadata的row.names必须为sample ID，且必须与microdat对应
 
 - α多样性
 
@@ -16,7 +17,9 @@
 
 > p.adj = T or F，是否校正P值，default = T
 
-> title = 表格标题，可以为空
+> title = 图标题，可以为空
+
+> color = ，可以为空
 
 example:
 
@@ -45,7 +48,11 @@ res$plot
 
 > sample_in_row = T or F，特征表row.names为sample ID or colnames为sample ID
 
-> title = 表格标题，可以为空
+> title = 图标题，可以为空
+
+> color = ，可以为空
+
+
 
 example:
 
