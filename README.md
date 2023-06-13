@@ -13,7 +13,5 @@
 > title = 表格标题，可以为空
 
 example:
-res <- shannon_index(microdat = microdat,metadata = metadata, 
-                     group = 'DM',sample_in_row = T,
-                     p.adj = T,title = 'Bacterial')
+res <- shannon_index(microdat = microdat, metadata = metadata, group = 'DM', sample_in_row = T, p.adj = T, title = 'Bacterial')
 
