@@ -6,7 +6,7 @@
 
 > group = 分组变量
 
-> sample_in_row = T or F，sample ID是否在行
+> sample_in_row = T or F，特征表row.names是否为sample ID
 
 > p.adj = T or F，是否校正P值
 
