@@ -1,10 +1,10 @@
 # diversity-code
 
-\# color最好还是自定义
-
 \# metadata的row.names必须为sample ID
 
 \# microdat的sample ID、OTU/Species/Genus...必须是行或列名
+
+\# color最好还是自定义
 
 - α多样性
 
@@ -36,8 +36,7 @@ res$data
 
 res$plot
 
-
-
+----------------------------------------------------------------------------------------------------------------
 
 - β多样性
 
