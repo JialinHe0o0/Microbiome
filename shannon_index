@@ -1,5 +1,5 @@
 
-shannon_index <- function(microdat,metadata,group,sample_in_row,p.adj,title){
+shannon_index <- function(microdat,metadata,group,sample_in_row,p.adj=T,title=NULL){
   library(tidyverse)
   library(stringr)
   library(ggpubr)
@@ -24,10 +24,6 @@ shannon_index <- function(microdat,metadata,group,sample_in_row,p.adj,title){
   min <- min(shannon$shannon)
 
   label <- ifelse(p.adj,'p.adj','p')
-  
-  if(!exists('title',mode = 'vector')){
-    title = NULL
-  }
   
   if(len==2){
     
