@@ -9,6 +9,9 @@ PCOA_plot <- function(microdat,metadata,group,sample_in_row,title=NULL,color=NUL
   if(sample_in_row == F){
     microdat <- t(microdat) %>% as.data.frame()
   }
+  
+  id <- row.names(metadata)
+  microdat <- microdat[id,]
 
   colnames(metadata)[colnames(metadata)==group] <- 'group_in_function'
   
