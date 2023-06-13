@@ -11,7 +11,7 @@
 
 > sample_in_row = T or F，特征表row.names为sample ID or colnames为sample ID
 
-> p.adj = T or F，是否校正P值
+> p.adj = T or F，是否校正P值，default = T
 
 > title = 表格标题，可以为空
 
