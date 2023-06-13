@@ -1,12 +1,11 @@
 
-PCOA_plot <- function(microdat,metadata,group,sample_in_row,title=NULL){
-  library(tidyverse)
-  library(stringr)
-  library(ggpubr)
-  library(vegan)
-  library(car)
-  library(ggthemes)
-  
+# Jialin He edited in 202306
+
+PCOA_plot <- function(microdat,metadata,group,sample_in_row,title=NULL,color=NULL){
+
+  if(!require(pacman))install.packages(pacman)
+  pacman::p_load(tidyverse,ggpubr,vegan,car,ggthemes,scico)
+
   if(sample_in_row == F){
     microdat <- t(microdat) %>% as.data.frame()
   }
@@ -35,9 +34,6 @@ PCOA_plot <- function(microdat,metadata,group,sample_in_row,title=NULL){
   
   group_average <- aggregate(cbind(pcoa1, pcoa2)~group_in_function, 
                              data = site, FUN = mean)
-  
-  
-  color <- c('#93b1b3','#324960','#dc8f75','#e4b687','#b65949','#786a6a')
 
   eli <- dataEllipse(x = site$pcoa1,y = site$pcoa2,levels = 0.95,draw = F) %>% as.data.frame()
   xmin <- min(eli$x)
@@ -46,6 +42,10 @@ PCOA_plot <- function(microdat,metadata,group,sample_in_row,title=NULL){
   ymax <- max(eli$y)
   
   len <- length(unique(metadata$group_in_function))
+  
+  if(is.null(color)){
+    color <- scico::scico(n = len,palette = 'berlin')
+  }
   
   if(len<2){
     stop('ERROR: only one level in your group')
@@ -68,7 +68,7 @@ PCOA_plot <- function(microdat,metadata,group,sample_in_row,title=NULL){
                                     ymax+(ymax-ymin)*0.025))+
       guides(color=guide_legend(override.aes = list(size=2.5)))+
       labs(title = title,x = pcoa1,y = pcoa2,color = '')+
-      scale_color_manual(values = color[c(2,3)])+
+      scale_color_manual(values = color)+
       # annotate('text', label = 'PERMANOVA', 
       #          x = xmax*0.9, y = xmax*0.99, size = 3.6)+
       annotate('text', label = sprintf('italic(P) == %.3f', 
@@ -105,7 +105,7 @@ PCOA_plot <- function(microdat,metadata,group,sample_in_row,title=NULL){
                                     ymax+(ymax-ymin)*0.025))+
       guides(color=guide_legend(override.aes = list(size=2.5)))+
       labs(title = title,x = pcoa1,y = pcoa2,color = '')+
-      scale_color_manual(values = color[1:len])+
+      scale_color_manual(values = color)+
       # annotate('text', label = 'PERMANOVA', 
       #          x = xmax*0.9, y = xmax*0.99, size = 3.6)+
       annotate('text', label = sprintf('italic(P) == %.3f', 
