@@ -24,9 +24,7 @@ shannon_index <- function(microdat,metadata,group,sample_in_row,p.adj){
 
   label <- ifelse(p.adj,'p.adj','p')
   
-  if(len==2){
-    ## 两组比较 ----
-    
+  if(len==2){    
     stat.test <- compare_means(shannon~group_in_function,
                                p.adjust.method = 'BH',
                                data = mer,method = 'wilcox.test')
