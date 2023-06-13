@@ -1,7 +1,7 @@
 
 # Jialin He edited in 202306
 
-PCOA_plot <- function(microdat,metadata,group,sample_in_row,title=NULL,color=NULL){
+PCOA_plot <- function(microdat,metadata,group,sample_in_row,title=NULL,color=NULL,seed=0){
 
   if(!require(pacman))install.packages(pacman)
   pacman::p_load(tidyverse,ggpubr,vegan,car,ggthemes,scico)
@@ -16,6 +16,7 @@ PCOA_plot <- function(microdat,metadata,group,sample_in_row,title=NULL,color=NUL
   colnames(metadata)[colnames(metadata)==group] <- 'group_in_function'
   
   # calculate P value
+  set.seed(seed)
   adonis_microdat <- adonis2(microdat~group_in_function,
                              data = metadata,
                              distance = 'bray', permutations = 999)
