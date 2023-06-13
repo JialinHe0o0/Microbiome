@@ -1,4 +1,7 @@
 # diversity-code
+
+\# 因为我自己设置的色盘只有6种颜色，所以最多只能有6个分组
+
 - α多样性
 
 1. shannon_index()
@@ -43,3 +46,11 @@ res$plot
 > sample_in_row = T or F，特征表row.names为sample ID or colnames为sample ID
 
 > title = 表格标题，可以为空
+
+example:
+
+res <- PCOA_plot(microdat, metadata, group = 'DM', sample_in_row = T)
+
+res
+
+
