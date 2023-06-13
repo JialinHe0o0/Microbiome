@@ -1,10 +1,14 @@
 
-shannon_index <- function(microdat,metadata,group,sample_in_row,p.adj=T,title=NULL){
-  library(tidyverse)
-  library(stringr)
-  library(ggpubr)
-  library(vegan)
-  library(ggthemes)
+# Jialin He edited in 202306
+
+shannon_index <- function(microdat,metadata,group,sample_in_row,p.adj=T,title=NULL,color=NULL){
+  # library(tidyverse)
+  # library(ggpubr)
+  # library(vegan)
+  # library(ggthemes)
+  
+  if(!require(pacman))install.packages(pacman)
+  pacman::p_load(tidyverse,ggpubr,vegan,ggthemes,scico)
   
   if(sample_in_row == F){
     microdat <- t(microdat) %>% as.data.frame()
@@ -15,18 +19,21 @@ shannon_index <- function(microdat,metadata,group,sample_in_row,p.adj=T,title=NU
   names(shannon) <- "shannon"
   shannon$ID <- row.names(shannon)
   mer <- merge(shannon,metadata, by = 'row.names')
-  
   colnames(mer)[colnames(mer)==group] <- 'group_in_function'
-  color <- c('#93b1b3','#324960','#dc8f75','#e4b687','#b65949','#786a6a')
   
   len <- length(unique(mer$group_in_function))
   max <- max(shannon$shannon)
   min <- min(shannon$shannon)
+  
+  if(is.null(color)){
+    color <- scico::scico(n = len,palette = 'berlin')
+  }
 
   label <- ifelse(p.adj,'p.adj','p')
   
-  if(len==2){
-    
+  if(len<2){
+    stop('ERROR: only one level in your group')
+  }else if(len==2){
     stat.test <- compare_means(shannon~group_in_function,
                                p.adjust.method = 'BH',
                                data = mer,method = 'wilcox.test')
@@ -43,8 +50,8 @@ shannon_index <- function(microdat,metadata,group,sample_in_row,p.adj=T,title=NU
                   size = 1,alpha = 0.9)+
       # coord_cartesian(ylim = ylim1*1.05)+
       theme_few()+
-      scale_color_manual(values = color[c(2,3)])+
-      scale_fill_manual(values = color[c(2,3)])+
+      scale_color_manual(values = color)+
+      scale_fill_manual(values = color)+
       scale_y_continuous()+
       labs(title = title,x = NULL,y = "Shannon index")+
       theme(plot.title=element_text(family = "serif",
@@ -81,8 +88,8 @@ shannon_index <- function(microdat,metadata,group,sample_in_row,p.adj=T,title=NU
                   size = 1,alpha = 0.9)+
       # coord_cartesian(ylim = ylim1*1.05)+
       theme_few()+
-      scale_color_manual(values = color[c(1:len)])+
-      scale_fill_manual(values = color[c(1:len)])+
+      scale_color_manual(values = color)+
+      scale_fill_manual(values = color)+
       scale_y_continuous()+
       labs(title = title,x = NULL,y = "Shannon index")+
       theme(plot.title=element_text(family = "serif",
@@ -104,4 +111,3 @@ shannon_index <- function(microdat,metadata,group,sample_in_row,p.adj=T,title=NU
   list <- list(data=shannon,plot=shannon_plot)
   return(list)
 }
-
