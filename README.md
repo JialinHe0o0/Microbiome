@@ -2,7 +2,7 @@
 - shannon_index()：α多样性
 > microdat = 菌群特征表
 
-> metadata = 临床数据
+> metadata = 临床数据，row.names需要为sample ID
 
 > group = 分组变量
 
