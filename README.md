@@ -27,3 +27,17 @@ res$data
 
 res$plot
 
+
+- β多样性
+
+1. PCOA_plot()
+
+> microdat = 菌群特征表
+
+> metadata = 临床数据，row.names需要为sample ID
+
+> group = 分组变量
+
+> sample_in_row = T or F，特征表row.names为sample ID or colnames为sample ID
+
+> title = 表格标题，可以为空
