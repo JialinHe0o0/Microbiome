@@ -1,5 +1,7 @@
 # Jialin He
 
+\# function
+
 ## diversity-code
 
 \# metadata的row.names必须为sample ID
