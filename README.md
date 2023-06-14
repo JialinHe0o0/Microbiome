@@ -44,6 +44,8 @@ res$plot
 
 ### β多样性
 
+/# 非限制性，类似于无监督
+
 - PCOA_plot()
 
 > microdat = 菌群特征表
@@ -65,6 +67,33 @@ res$plot
 example:
 
 res <- PCOA_plot(microdat, metadata, group = 'DM', sample_in_row = T)
+
+res
+
+
+/# 限制性，类似于有监督
+
+- CPCOA_plot()
+
+> microdat = 菌群特征表
+
+> metadata = 临床数据，row.names需要为sample ID
+
+> group = 分组变量
+
+> sample_in_row = T or F，特征表row.names为sample ID or colnames为sample ID
+
+> title = 图标题，可以为空
+
+> color = ，可以为空
+
+> seed = ,可以为空
+
+
+
+example:
+
+res <- CPCOA_plot(microdat, metadata, group = 'DM', sample_in_row = T)
 
 res
 
