@@ -1,6 +1,7 @@
 
 # Jialin He edited in 202306
 
+
 PCOA_plot <- function(microdat,metadata,group,sample_in_row,title=NULL,color=NULL,seed=0){
 
   if(!require(pacman))install.packages(pacman)
@@ -15,36 +16,6 @@ PCOA_plot <- function(microdat,metadata,group,sample_in_row,title=NULL,color=NUL
 
   colnames(metadata)[colnames(metadata)==group] <- 'group_in_function'
   
-  # calculate P value
-  set.seed(seed)
-  adonis_microdat <- adonis2(microdat~group_in_function,
-                             data = metadata,
-                             distance = 'bray', permutations = 999)
-  
-  # PCOA
-  
-  # bray matrix
-  pcoa_dis <- vegdist(microdat, method = 'bray')
-  
-  pcoa <- cmdscale(pcoa_dis, k = (nrow(microdat) - 1), eig = TRUE)
-  
-  pcoa_exp <- pcoa$eig/sum(pcoa$eig)
-  pcoa1 <- paste('PCoA1 :', round(100*pcoa_exp[1], 2), '%')
-  pcoa2 <- paste('PCoA2 :', round(100*pcoa_exp[2], 2), '%')
-  
-  site <- data.frame(pcoa$point)[1:2]
-  site <- cbind.data.frame(site,metadata)
-  names(site)[1:2] <- c('pcoa1', 'pcoa2')
-  
-  group_average <- aggregate(cbind(pcoa1, pcoa2)~group_in_function, 
-                             data = site, FUN = mean)
-
-  eli <- dataEllipse(x = site$pcoa1,y = site$pcoa2,levels = 0.95,draw = F) %>% as.data.frame()
-  xmin <- min(eli$x)
-  xmax <- max(eli$x)
-  ymin <- min(eli$y)
-  ymax <- max(eli$y)
-  
   len <- length(unique(metadata$group_in_function))
   
   if(is.null(color)){
@@ -53,7 +24,61 @@ PCOA_plot <- function(microdat,metadata,group,sample_in_row,title=NULL,color=NUL
   
   if(len<2){
     stop('ERROR: only one level in your group')
-  }else if(len==2){
+  }else{
+    # calculate P value
+    set.seed(seed)
+    adonis_microdat <- adonis2(microdat~group_in_function,
+                               data = metadata,
+                               distance = 'bray', permutations = 999)
+    p.val <- round(adonis_microdat[1,5],3)
+    variance <- round(adonis_microdat[1,3]*100,2)
+    variance <- paste0(variance,'%')
+    label <- bquote(atop(R^2 == .(variance),  italic(P)==.(p.val)))
+    
+    # PCOA
+    
+    # bray matrix
+    pcoa_dis <- vegdist(microdat, method = 'bray')
+    
+    pcoa <- cmdscale(pcoa_dis, k = (nrow(microdat) - 1), eig = TRUE)
+    
+    pcoa_exp <- pcoa$eig/sum(pcoa$eig)
+    pcoa1 <- paste('PCoA1 :', round(100*pcoa_exp[1], 2), '%')
+    pcoa2 <- paste('PCoA2 :', round(100*pcoa_exp[2], 2), '%')
+    
+    site <- data.frame(pcoa$point)[1:2]
+    site <- cbind.data.frame(site,metadata)
+    names(site)[1:2] <- c('pcoa1', 'pcoa2')
+    
+    group_average <- aggregate(cbind(pcoa1, pcoa2)~group_in_function, 
+                               data = site, FUN = mean)
+    
+    xmin <- NULL
+    xmax <- NULL
+    ymin <- NULL
+    ymax <- NULL
+    
+    for(i in unique(metadata$group_in_function)){
+      temp <- site[site$group_in_function == i,]
+      eli <- dataEllipse(x = temp$pcoa1,y = temp$pcoa2,
+                         levels = 0.95,draw = F) %>% as.data.frame()
+      xmint <- min(eli$x)
+      xmaxt <- max(eli$x)
+      ymint <- min(eli$y)
+      ymaxt <- max(eli$y)
+      
+      xmin <- c(xmin,xmint)
+      xmax <- c(xmax,xmaxt)
+      ymin <- c(ymin,ymint)
+      ymax <- c(ymax,ymaxt)
+    }
+    
+    xmin <- min(xmin)
+    xmax <- max(xmax)
+    ymin <- min(ymin)
+    ymax <- max(ymax)
+  }
+  if(len==2){
     plot <- ggplot(site)+
       geom_point(aes(x=pcoa1, y=pcoa2,
                      color = group_in_function),
@@ -73,12 +98,9 @@ PCOA_plot <- function(microdat,metadata,group,sample_in_row,title=NULL,color=NUL
       guides(color=guide_legend(override.aes = list(size=2.5)))+
       labs(title = title,x = pcoa1,y = pcoa2,color = '')+
       scale_color_manual(values = color)+
-      # annotate('text', label = 'PERMANOVA', 
-      #          x = xmax*0.9, y = xmax*0.99, size = 3.6)+
-      annotate('text', label = sprintf('italic(P) == %.3f', 
-                                       adonis_microdat[1,5]), 
+      annotate('text', label = label, 
                x = xmax*0.9, y = ymax*0.95, 
-               size = 3.6, parse = TRUE,family = 'serif')+
+               size = 3.6, family = 'serif')+
       theme_bw()+
       theme(legend.key = element_blank(),
             plot.title = element_text(family = "serif",size=12),
@@ -110,12 +132,9 @@ PCOA_plot <- function(microdat,metadata,group,sample_in_row,title=NULL,color=NUL
       guides(color=guide_legend(override.aes = list(size=2.5)))+
       labs(title = title,x = pcoa1,y = pcoa2,color = '')+
       scale_color_manual(values = color)+
-      # annotate('text', label = 'PERMANOVA', 
-      #          x = xmax*0.9, y = xmax*0.99, size = 3.6)+
-      annotate('text', label = sprintf('italic(P) == %.3f', 
-                                       adonis_microdat[1,5]), 
+      annotate('text', label = label, 
                x = xmax*0.9, y = ymax*0.95, 
-               size = 3.6, parse = TRUE,family = 'serif')+
+               size = 3.6, family = 'serif')+
       theme_bw()+
       theme(legend.key = element_blank(),
             plot.title = element_text(family = "serif",size=12),
