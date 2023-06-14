@@ -24,7 +24,7 @@
 
 > p.adj = T or F，是否校正P值，default = T
 
-> p.signif = T or F，T即返回***, **, *, ns，F返回P值
+> p.signif = T or F，default = T，T即返回***, **, *, ns，F返回P值
 
 > title = 图标题，可以为空
 
