@@ -1,14 +1,16 @@
 
 # Jialin He edited in 202306
 
-shannon_index <- function(microdat,metadata,group,sample_in_row,p.adj=T,title=NULL,color=NULL){
+
+shannon_index <- function(microdat,metadata,group,sample_in_row,
+                          p.adj=T,p.signif=T,title=NULL,color=NULL){
   # library(tidyverse)
   # library(ggpubr)
   # library(vegan)
   # library(ggthemes)
   
   if(!require(pacman))install.packages(pacman)
-  pacman::p_load(tidyverse,ggpubr,vegan,ggthemes,scico)
+  pacman::p_load(tidyverse,ggpubr,rstatix,vegan,ggthemes,scico)
   
   if(sample_in_row == F){
     microdat <- t(microdat) %>% as.data.frame()
@@ -33,14 +35,19 @@ shannon_index <- function(microdat,metadata,group,sample_in_row,p.adj=T,title=NU
   }
 
   label <- ifelse(p.adj,'p.adj','p')
-  
+  signif <- ifelse(p.adj,'p.adj.signif','p.signif')
+    
   if(len<2){
     stop('ERROR: only one level in your group')
   }else if(len==2){
     stat.test <- compare_means(shannon~group_in_function,
                                p.adjust.method = 'BH',
-                               data = mer,method = 'wilcox.test')
-    stat.test[[label]] <- paste0('P = ',round(stat.test[[label]],3))
+                               data = mer,method = 'wilcox.test') %>% add_significance()
+    if(p.signif){
+      label <- signif
+    }else{
+      stat.test[[label]] <- paste0('P = ',round(stat.test[[label]],3))
+    }
     
     shannon_plot <- 
       ggplot(data = mer,aes(x = group_in_function,
@@ -71,14 +78,19 @@ shannon_index <- function(microdat,metadata,group,sample_in_row,p.adj=T,title=NU
                          y.position = max+(max-min)/10,
                          family = 'serif',
                          step.increase = 0.09,
-                         tip.length = 0.02,label = label)
+                         tip.length = 0.02,label = 'p.adj.signif')
   }else{
     stat.test <- compare_means(shannon~group_in_function,
                                method = 'wilcox.test',
                                data = mer,
-                               p.adjust.method = 'BH')
-    stat.test[[label]] <- paste0(rep('P = ',factorial(len)/(2*factorial((len-2)))),
-                                 round(stat.test[[label]],3))
+                               p.adjust.method = 'BH') %>% add_significance()
+    
+    if(p.signif){
+      label <- signif
+    }else{
+      stat.test[[label]] <- paste0(rep('P = ',factorial(len)/(2*factorial((len-2)))),
+                                   round(stat.test[[label]],3))
+    }
     
     shannon_plot <- 
       ggplot(data = mer,aes(x = group_in_function,
