@@ -56,7 +56,7 @@ res$plot
 
 > group = 分组变量
 
-> sample_in_row = T or F，特征表row.names为sample ID or colnames为sample ID
+> sample_in_row = T or F，T即特征表row.names为sample ID
 
 > title = 图标题，可以为空
 
@@ -83,7 +83,7 @@ res
 
 > group = 分组变量
 
-> sample_in_row = T or F，特征表row.names为sample ID or colnames为sample ID
+> sample_in_row = T or F，T即特征表row.names为sample ID
 
 > title = 图标题，可以为空
 
