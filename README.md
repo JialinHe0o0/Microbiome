@@ -46,7 +46,7 @@ res$plot
 
 ### β多样性
 
-/# 非限制性，类似于无监督
+\# 非限制性，类似于无监督
 
 - PCOA_plot()
 
@@ -73,7 +73,7 @@ res <- PCOA_plot(microdat, metadata, group = 'DM', sample_in_row = T)
 res
 
 
-/# 限制性，类似于有监督
+\# 限制性，类似于有监督
 
 - CPCOA_plot()
 
