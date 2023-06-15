@@ -2,15 +2,18 @@
 # Jialin He edited in 202306
 
 
-shannon_index <- function(microdat,metadata,group,sample_in_row,
-                          p.adj=T,p.signif=T,title=NULL,color=NULL){
+shannon_index <- function(microdat,metadata,group,
+                          sample_in_row,
+                          p.adj = T,p.signif = T,
+                          title = NULL,color = NULL,
+                          path = NULL,filename = 'shannon',
+                          width = 6.6,height = 5){
   # library(tidyverse)
   # library(ggpubr)
   # library(vegan)
   # library(ggthemes)
-  
   if(!require(pacman))install.packages(pacman)
-  pacman::p_load(tidyverse,ggpubr,rstatix,vegan,ggthemes,scico)
+  pacman::p_load(tidyverse,ggpubr,rstatix,vegan,scico)
   
   if(sample_in_row == F){
     microdat <- t(microdat) %>% as.data.frame()
@@ -59,7 +62,7 @@ shannon_index <- function(microdat,metadata,group,sample_in_row,
                   width = 0.25,shape = 21,
                   size = 1,alpha = 0.9)+
       # coord_cartesian(ylim = ylim1*1.05)+
-      theme_few()+
+      theme_bw()+
       scale_color_manual(values = color)+
       scale_fill_manual(values = color)+
       scale_y_continuous()+
@@ -102,7 +105,7 @@ shannon_index <- function(microdat,metadata,group,sample_in_row,
                   width = 0.25,shape = 21,
                   size = 1,alpha = 0.9)+
       # coord_cartesian(ylim = ylim1*1.05)+
-      theme_few()+
+      theme_bw()+
       scale_color_manual(values = color)+
       scale_fill_manual(values = color)+
       scale_y_continuous()+
@@ -124,5 +127,12 @@ shannon_index <- function(microdat,metadata,group,sample_in_row,
                          family = 'serif',size = 3.8)
   }
   list <- list(data=shannon,plot=shannon_plot)
+  
+  if(!is.null(path)){
+    ggsave(plot = shannon_plot,
+           filename = paste0(path,'/',filename,'_plot.pdf'),
+           width = width,height = height)
+  }
+  
   return(list)
 }
