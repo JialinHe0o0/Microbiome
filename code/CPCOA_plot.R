@@ -2,8 +2,11 @@
 # Jialin He 202306
 
 
-CPCOA_plot <- function(microdat,metadata,group,sample_in_row,title = NULL,color = NULL,seed = 0){
-  
+CPCOA_plot <- function(microdat,metadata,group,
+                       sample_in_row,title = NULL,
+                       color = NULL,path = NULL,
+                       filename = 'CPCoA',seed = 0,
+                       width = 6.6,height = 5){
   if(!require(pacman))install.packages(pacman)
   pacman::p_load(tidyverse,vegan,car,ggthemes,scico)
   
@@ -125,5 +128,12 @@ CPCOA_plot <- function(microdat,metadata,group,sample_in_row,title = NULL,color 
             axis.ticks.length.y = unit(0.1,'cm'),
             plot.margin = unit(c(0.2,0.2,0.2,0.2),"cm"))
   }
+  
+  if(!is.null(path)){
+    ggsave(plot = plot,
+           filename = paste0(path,'/',filename,'_plot.pdf'),
+           width = width,height = height)
+  }
+  
   return(plot)
 }
