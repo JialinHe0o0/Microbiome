@@ -2,8 +2,11 @@
 # Jialin He edited in 202306
 
 
-PCOA_plot <- function(microdat,metadata,group,sample_in_row,title=NULL,color=NULL,seed=0){
-
+PCOA_plot <- function(microdat,metadata,group,
+                      sample_in_row,title = NULL,
+                      color = NULL,path = NULL,
+                      filename = 'PCoA',seed = 0,
+                      width = 6.6,height = 5){
   if(!require(pacman))install.packages(pacman)
   pacman::p_load(tidyverse,ggpubr,vegan,car,ggthemes,scico)
 
@@ -147,5 +150,12 @@ PCOA_plot <- function(microdat,metadata,group,sample_in_row,title=NULL,color=NUL
             axis.ticks.length.y = unit(0.1,'cm'),
             plot.margin = unit(c(0.2,0.2,0.2,0.2),"cm"))
   }
+  
+  if(!is.null(path)){
+    ggsave(plot = plot,
+           filename = paste0(path,'/',filename,'_plot.pdf'),
+           width = width,height = height)
+  }
+  
   return(plot)
 }
