@@ -30,6 +30,12 @@
 
 > color = ，可以为空
 
+> path = NULL，保存pdf文件的路径，可以为空，即不输出到路径
+
+> filename = 'shannon'
+
+> width = 6.6,height = 5
+
 example:
 
 res <- shannon_index(microdat = microdat, metadata = metadata, group = 'DM', sample_in_row = T, p.adj = T, title = 'Bacterial')
@@ -64,6 +70,11 @@ res$plot
 
 > seed = ,可以为空
 
+> path = NULL，保存pdf文件的路径，可以为空，即不输出到路径
+
+> filename = 'shannon'
+
+> width = 6.6,height = 5
 
 
 example:
@@ -91,7 +102,11 @@ res
 
 > seed = ,可以为空
 
+> path = NULL，保存pdf文件的路径，可以为空，即不输出到路径
 
+> filename = 'shannon'
+
+> width = 6.6,height = 5
 
 example:
 
