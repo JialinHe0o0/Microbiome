@@ -34,7 +34,9 @@
 
 > filename = 'shannon'
 
-> width = 6.6,height = 5
+> width = plot宽度
+
+> height = plot高度
 
 example:
 
@@ -74,7 +76,9 @@ res$plot
 
 > filename = 'shannon'
 
-> width = 6.6,height = 5
+> width = plot宽度
+
+> height = plot高度
 
 
 example:
@@ -106,7 +110,9 @@ res
 
 > filename = 'shannon'
 
-> width = 6.6,height = 5
+> width = plot宽度
+
+> height = plot高度
 
 example:
 
