@@ -12,31 +12,33 @@
 
 ### α多样性
 
-- shannon_index()
+- **shannon_index()**
 
-> microdat = 菌群特征表
+shannon_index(
 
-> metadata = 临床数据，row.names需要为sample ID
+microdat = ,# 菌群特征表
 
-> group = 分组变量
+metadata = ,# 临床数据，row.names需要为sample ID
 
-> sample_in_row = T or F，T即特征表row.names为sample ID
+group = ,# 分组变量
 
-> p.adj = T or F，是否校正P值，default = T
+sample_in_row = ,# T or F，T即特征表row.names为sample ID
 
-> p.signif = T or F，default = T，T即返回***, **, *, ns，F返回P值
+p.adj = ,# T or F，是否校正P值，default = T
 
-> title = 图标题，可以为空
+p.signif = ,# T or F，default = T，T即返回***, **, *, ns，F返回P值
 
-> color = ，可以为空
+title = ,# 图标题，可以为空
 
-> path = NULL，保存pdf文件的路径，可以为空，即不输出到路径
+color = ,# 可以为空
 
-> filename = 'shannon'
+path = ,# NULL，保存pdf文件的路径，可以为空，即不输出到路径
 
-> width = plot宽度
+filename = ,# 'shannon'
 
-> height = plot高度
+width = ,# plot宽度
+
+height = ,# plot高度）
 
 example:
 
@@ -56,29 +58,31 @@ res$plot
 
 \# 非限制性，类似于无监督
 
-- PCOA_plot()
+- **PCOA_plot()**
 
-> microdat = 菌群特征表
+PCOA_plot(
 
-> metadata = 临床数据，row.names需要为sample ID
+microdat = ,# 菌群特征表
 
-> group = 分组变量
+metadata = ,# 临床数据，row.names需要为sample ID
 
-> sample_in_row = T or F，T即特征表row.names为sample ID
+group = ,# 分组变量
 
-> title = 图标题，可以为空
+sample_in_row = ,# T or F，T即特征表row.names为sample ID
 
-> color = ，可以为空
+title = ,# 图标题，可以为空
 
-> seed = ,可以为空
+color = ,# 可以为空
 
-> path = NULL，保存pdf文件的路径，可以为空，即不输出到路径
+seed = ,# 可以为空
 
-> filename = 'shannon'
+path = ,# 可以为空，保存pdf文件的路径，空即不输出到路径
 
-> width = plot宽度
+filename = ,# 'PCOA'
 
-> height = plot高度
+width = ,# plot宽度
+
+height = ,# plot高度）
 
 
 example:
@@ -92,27 +96,29 @@ res
 
 - CPCOA_plot()
 
-> microdat = 菌群特征表
+CPCOA_plot(
 
-> metadata = 临床数据，row.names需要为sample ID
+microdat = ,# 菌群特征表
 
-> group = 分组变量
+metadata = ,# 临床数据，row.names需要为sample ID
 
-> sample_in_row = T or F，T即特征表row.names为sample ID
+group = ,# 分组变量
 
-> title = 图标题，可以为空
+sample_in_row = ,# T or F，T即特征表row.names为sample ID
 
-> color = ，可以为空
+title = ,# 图标题，可以为空
 
-> seed = ,可以为空
+color = ,# 可以为空
 
-> path = NULL，保存pdf文件的路径，可以为空，即不输出到路径
+seed = ,# 可以为空
 
-> filename = 'shannon'
+path = ,# 可以为空，保存pdf文件的路径，空即不输出到路径
 
-> width = plot宽度
+filename = ,# 'CPCOA'
 
-> height = plot高度
+width = ,# plot宽度
+
+height = ,# plot高度）
 
 example:
 
