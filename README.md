@@ -5,9 +5,9 @@
 
 ## diversity-code
 
-\# metadata的row.names必须为sample ID
+\# **metadata的row.names必须为sample ID**
 
-\# microdat的sample ID、OTU/Species/Genus...必须是行或列名
+\# **microdat的sample ID、OTU/Species/Genus...必须是行或列名**
 
 \# color最好还是自定义
 
