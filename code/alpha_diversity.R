@@ -30,8 +30,8 @@ alpha_diversity <- function(microdat,
   
   ## α-diversity ----
   Shannon <- vegan::diversity(microdat,"shannon")
-  Simpson <- vegan::diversity(microdat,'simpson')
-  Gini_Simpson <- 1-vegan::diversity(microdat,index = 'simpson')
+  Simpson <- 1-vegan::diversity(microdat,'simpson')
+  Gini_Simpson <- vegan::diversity(microdat,index = 'simpson')
   Inv_Simpson <- vegan::diversity(microdat,index = 'invsimpson')
   Richness <- apply(microdat,1,function(x){sum(x>0)})
   # Richness <- specnumber(microdat)
@@ -56,10 +56,10 @@ alpha_diversity <- function(microdat,
   
   if(plot_index == 'Shannon'){
     ytitle <- 'Shannon Index'
-  }else if(plot_index == 'Gini_Simpson'){
-    ytitle <- 'Gini-Simpson Index'
   }else if(plot_index == 'Simpson'){
     ytitle <- 'Simpson Index'
+  }else if(plot_index == 'Gini_Simpson'){
+    ytitle <- 'Gini-Simpson Index'
   }else if(plot_index == 'Inv_Simpson'){
     ytitle <- 'Inverse Simpson Index'
   }else if(plot_index == 'Richness'){
@@ -83,6 +83,7 @@ alpha_diversity <- function(microdat,
   }
   
   label <- ifelse(p.adj,'p.adj','p')
+  
   signif <- ifelse(p.adj,'p.adj.signif','p.signif')
   
   if(len<2){
