@@ -20,14 +20,14 @@
 alpha_diversity(microdat = ,# 菌群特征表
                 metadata = ,# 临床数据，row.names需要为sample ID
                 group = ,# 分组变量
-                sample_in_row = ,# T or F，T即特征表row.names为sample ID
-                plot_index = , # 默认'Shannon'，还有Simpson、Gini_Simpson、Inv_Simpson、Richness、Pielou、equitability、AVD
-                p.adj = ,# T or F，是否校正P值，default = T
-                p.signif = ,# T or F，default = T，T即返回***, **, *, ns，F返回P值
-                title = ,# 图标题，可以为空
-                color = ,# 可以为空
-                path = ,# NULL，保存pdf文件的路径，可以为空，即不输出到路径
-                filename = ,# 'alpha_diversity'
+                sample_in_row = T,# T or F，T即特征表row.names为sample ID
+                plot_index = 'Shannon', # 默认'Shannon'，还有Simpson、Gini_Simpson、Inv_Simpson、Richness、Pielou、equitability、AVD
+                p.adj = T,# T or F，是否校正P值，default = T
+                p.signif = T,# T or F，default = T，T即返回***, **, *, ns，F返回P值
+                title = NULL,# 图标题，可以为空
+                color = NULL,# 可以为空
+                path = NULL,# NULL，保存pdf文件的路径，可以为空，即不输出到路径
+                filename = 'diversity_plot',
                 width = ,# plot宽度
                 height = ) # plot高度
 ```
@@ -61,12 +61,12 @@ res$plot
 PCOA_plot(microdat = ,# 菌群特征表
           metadata = ,# 临床数据，row.names需要为sample ID
           group = ,# 分组变量
-          sample_in_row = ,# T or F，T即特征表row.names为sample ID
-          title = ,# 图标题，可以为空
-          color = ,# 可以为空
-          seed = ,# 可以为空
-          path = ,# 可以为空，保存pdf文件的路径，空即不输出到路径
-          filename = ,# 'PCOA'
+          sample_in_row = T,# T or F，T即特征表row.names为sample ID
+          title = NULL,# 图标题，可以为空
+          color = NULL,# 可以为空
+          seed = 0,# 可以为空
+          path = NULL,# 可以为空，保存pdf文件的路径，空即不输出到路径
+          filename = 'PCOA',# 'PCOA'
           width = ,# plot宽度
           height = ) # plot高度
 ```
@@ -88,12 +88,12 @@ res
 CPCOA_plot(microdat = ,# 菌群特征表
            metadata = ,# 临床数据，row.names需要为sample ID
            group = ,# 分组变量
-           sample_in_row = ,# T or F，T即特征表row.names为sample ID
-           title = ,# 图标题，可以为空
-           color = ,# 可以为空
-           seed = ,# 可以为空
-           path = ,# 可以为空，保存pdf文件的路径，空即不输出到路径
-           filename = ,# 'CPCOA'
+           sample_in_row = T,# T or F，T即特征表row.names为sample ID
+           title = NULL,# 图标题，可以为空
+           color = NULL,# 可以为空
+           seed = 0,# 可以为空
+           path = NULL,# 可以为空，保存pdf文件的路径，空即不输出到路径
+           filename = 'CPCOA',# 'CPCOA'
            width = ,# plot宽度
            height = ) # plot高度
 ```
