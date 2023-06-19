@@ -46,7 +46,15 @@ alpha_diversity(
 
 example:
 
-res <- shannon_index(microdat = microdat, metadata = metadata, group = 'DM', sample_in_row = T, p.adj = T, title = 'Bacterial')
+res <- alpha_diversity(microdat = bacteria,metadata = metadata,
+
+group = 'Group',
+
+sample_in_row = T,p.adj = T,
+
+title = 'Example',p.signif = T,
+
+color = color[1:5])
 
 \# 返回sample ID、全部指数、分组的表格
 
