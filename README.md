@@ -48,13 +48,13 @@ example:
 
 res <- alpha_diversity(microdat = bacteria,metadata = metadata,
 
-group = 'Group',
+                       group = 'Group',
 
-sample_in_row = T,p.adj = T,
+                       sample_in_row = T,p.adj = T,
 
-title = 'Example',p.signif = T,
+                       title = 'Example',p.signif = T,
 
-color = color[1:5])
+                       color = color[1:5])
 
 \# 返回sample ID、全部指数、分组的表格
 
