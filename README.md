@@ -1,6 +1,7 @@
 # Jialin He
 
 \# function
+\# 练习时长两年半
 
 ## diversity-code
 
@@ -12,9 +13,9 @@
 
 ### α多样性
 
-- **shannon_index()**
+- **alpha_diversity**
 
-shannon_index(
+alpha_diversity(
 
 microdat = ,# 菌群特征表
 
@@ -23,6 +24,8 @@ metadata = ,# 临床数据，row.names需要为sample ID
 group = ,# 分组变量
 
 sample_in_row = ,# T or F，T即特征表row.names为sample ID
+
+plot_index = , # 默认'Shannon'，还有Simpson、Gini_Simpson、Inv_Simpson、Richness、Pielou、equitability、AVD
 
 p.adj = ,# T or F，是否校正P值，default = T
 
@@ -44,7 +47,7 @@ example:
 
 res <- shannon_index(microdat = microdat, metadata = metadata, group = 'DM', sample_in_row = T, p.adj = T, title = 'Bacterial')
 
-\# 返回sample ID与shannon index的表格
+\# 返回sample ID、全部指数、分组的表格
 
 res$data
 
