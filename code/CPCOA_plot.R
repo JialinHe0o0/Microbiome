@@ -7,6 +7,7 @@ CPCOA_plot <- function(microdat,metadata,group,
                        color = NULL,path = NULL,
                        filename = 'CPCoA',seed = 0,
                        width = 6.6,height = 5){
+  
   if(!require(pacman))install.packages(pacman)
   pacman::p_load(tidyverse,vegan,car,ggthemes,scico)
   
@@ -96,8 +97,8 @@ CPCOA_plot <- function(microdat,metadata,group,
     plot <- ggplot(points, aes(x = CAP1, y = CAP2, 
                            color = group_in_function)) + 
       geom_point(size = 0.8) +
-      labs(x=paste("CPCoA 1 (", format(100 * eig[1] / sum(eig), digits=4), "%)", sep=""),
-           y=paste("CPCoA 2 (", format(100 * eig[2] / sum(eig), digits=4), "%)", sep="")) +
+      labs(x=paste("CPCoA1 (", format(100 * eig[1] / sum(eig), digits=4), "%)", sep=""),
+           y=paste("CPCoA2 (", format(100 * eig[2] / sum(eig), digits=4), "%)", sep="")) +
       stat_ellipse(level = 0.95, linetype = 2,linewidth = 0.8,
                    show.legend = FALSE) +
       geom_point(data = group_average, 
@@ -118,9 +119,9 @@ CPCOA_plot <- function(microdat,metadata,group,
                size = 3.6, family = 'serif')+
       theme_bw()+
       theme(legend.key = element_blank(),
-            plot.title = element_text(family = "serif",size=12),
-            axis.title.x= element_text(family = "serif",size=12),
-            axis.title.y= element_text(family = "serif",size=12),
+            plot.title = element_text(family = "serif",size=15),
+            axis.title.x= element_text(family = "serif",size=15),
+            axis.title.y= element_text(family = "serif",size=15),
             axis.text.x= element_text(family = "serif",size=12),
             axis.text.y= element_text(family = "serif",size=12),
             legend.text = element_text(family = "serif",size=10),
