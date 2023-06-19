@@ -3,17 +3,17 @@
 
 
 alpha_diversity <- function(microdat,
-                          metadata,group,
-                          sample_in_row,
-                          plot_index = 'Shannon',
-                          p.adj = T,
-                          p.signif = T,
-                          title = NULL,
-                          color = NULL,
-                          path = NULL,
-                          filename = 'diversity',
-                          width = 6.6,
-                          height = 5){
+                            metadata,group,
+                            sample_in_row,
+                            plot_index = 'Shannon',
+                            p.adj = T,
+                            p.signif = T,
+                            title = NULL,
+                            color = NULL,
+                            path = NULL,
+                            filename = 'diversity',
+                            width = 6.6,
+                            height = 5){
   
   if(!require(pacman))install.packages(pacman)
   pacman::p_load(tidyverse,ggpubr,rstatix,vegan,scico)
@@ -58,6 +58,8 @@ alpha_diversity <- function(microdat,
     ytitle <- 'Shannon Index'
   }else if(plot_index == 'Simpson'){
     ytitle <- 'Simpson Index'
+  }else if(plot_index == 'Inv_Simpson'){
+    ytitle <- 'Inverse Simpson Index'
   }else if(plot_index == 'Gini_Simpson'){
     ytitle <- 'Gini-Simpson Index'
   }else if(plot_index == 'Richness'){
@@ -68,6 +70,8 @@ alpha_diversity <- function(microdat,
     ytitle <- 'Simpson`s Evenness'
   }else if(plot_index == 'AVD'){
     ytitle <- 'AVD Index'
+  }else{
+    stop('ERROR: This index did not exist in it')
   }
   
   len <- length(unique(mer$group_in_function))
