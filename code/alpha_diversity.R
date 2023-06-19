@@ -56,12 +56,12 @@ alpha_diversity <- function(microdat,
   
   if(plot_index == 'Shannon'){
     ytitle <- 'Shannon Index'
+  }else if(plot_index == 'Gini_Simpson'){
+    ytitle <- 'Gini-Simpson Index'
   }else if(plot_index == 'Simpson'){
     ytitle <- 'Simpson Index'
   }else if(plot_index == 'Inv_Simpson'){
     ytitle <- 'Inverse Simpson Index'
-  }else if(plot_index == 'Gini_Simpson'){
-    ytitle <- 'Gini-Simpson Index'
   }else if(plot_index == 'Richness'){
     ytitle <- 'Richness'
   }else if(plot_index == 'Pielou'){
