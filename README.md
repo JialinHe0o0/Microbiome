@@ -2,7 +2,7 @@
 
 \# function
 
-\# 练习时长两年半，报错了必须是你的问题hhh o.0
+\# 练习时长两年半，报错了必须是你的问题 o.0
 
 ## diversity-code
 
@@ -26,7 +26,7 @@ alpha_diversity(microdat = ,# 菌群特征表
                 p.signif = T,# T or F，default = T，T即返回***, **, *, ns，F返回P值
                 title = NULL,# 图标题，可以为空
                 color = NULL,# 可以为空
-                path = NULL,# NULL，保存pdf文件的路径，可以为空，即不输出到路径
+                path = NULL,# 保存pdf文件的路径，可以为空，即不输出到路径
                 filename = 'diversity_plot',
                 width = ,# plot宽度
                 height = ) # plot高度
