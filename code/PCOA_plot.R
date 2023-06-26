@@ -40,7 +40,7 @@ PCOA_plot <- function(microdat,metadata,group,
       P_val <- anosim$signif %>% round(.,3)
       statistic <- anosim$statistic %>% round(.,3)
       label <- bquote(atop(R ==.(statistic),
-                           italic(P)==.(P_val)))
+                           italic(P) ==.(P_val)))
     }else if(signif_method == 'adonis'){
       adonis <- adonis2(microdat~group_in_function,data = metadata,
                         permutations = 999,method = 'bray')
@@ -48,7 +48,7 @@ PCOA_plot <- function(microdat,metadata,group,
       statistic <- (adonis[1,3]*100) %>% round(.,3)
       statistic <- paste0(statistic,'%')
       label <- bquote(atop(R^2 ==.(statistic),
-                           italic(P)==.(P_val)))
+                           italic(P) ==.(P_val)))
     }
     
     # PCOA
