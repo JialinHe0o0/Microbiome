@@ -57,6 +57,8 @@ res$plot
 
 - **PCOA_plot()**
 
+属于经典多维排列 (Multidimensional scaling, MDS)分析
+
 ```ruby
 PCOA_plot(microdat = ,# 菌群特征表
           metadata = ,# 临床数据，row.names需要为sample ID
@@ -65,6 +67,7 @@ PCOA_plot(microdat = ,# 菌群特征表
           title = NULL,# 图标题，可以为空
           color = NULL,# 可以为空
           seed = 0,# 可以为空
+          signif_method = , # adonis、anosim
           path = NULL,# 可以为空，保存pdf文件的路径，空即不输出到路径
           filename = 'PCOA',# 'PCOA'
           width = ,# plot宽度
@@ -79,7 +82,10 @@ res <- PCOA_plot(microdat, metadata, group = 'DM', sample_in_row = T)
 res
 ```
 
-- NMDS()
+- **NMDS()**
+
+非度量多维排列 (Non-metric multidimensional scaling, NMDS)
+将距离矩阵转换为秩矩阵，更关注排序关系
 
 ```ruby
 NMDS(microdat = ,
@@ -93,6 +99,7 @@ NMDS(microdat = ,
      k = ,try = ,trymax = , # metaMDS()的参数，已有默认设置，可以为空
      autotransform = , # metaMDS()的参数，已有默认设置，可以为空
      parallel = ,
+     signif_method = , # adonis、anosim
      filename = ,
      seed = ,
      width = ,
@@ -108,7 +115,7 @@ res <- NMDS(microdat, metadata, group = 'DM', sample_in_row = T)
 
 \# 限制性，类似于有监督
 
-- CPCOA_plot()
+- **CPCOA_plot()**
 
 ```ruby
 CPCOA_plot(microdat = ,# 菌群特征表
