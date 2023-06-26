@@ -79,6 +79,32 @@ res <- PCOA_plot(microdat, metadata, group = 'DM', sample_in_row = T)
 res
 ```
 
+- NMDS()
+
+```ruby
+NMDS(microdat = ,
+     metadata = ,
+     group = ,
+     sample_in_row = ,
+     title = ,
+     color = ,
+     path = ,
+     distance = , # metaMDS()的参数，已有默认设置，可以为空
+     k = ,try = ,trymax = , # metaMDS()的参数，已有默认设置，可以为空
+     autotransform = , # metaMDS()的参数，已有默认设置，可以为空
+     parallel = ,
+     filename = ,
+     seed = ,
+     width = ,
+     height = )
+```
+
+example
+
+```ruby
+res <- NMDS(microdat, metadata, group = 'DM', sample_in_row = T)
+```
+
 
 \# 限制性，类似于有监督
 
