@@ -95,8 +95,8 @@ NMDS <- function(microdat,
   }
   
   stress <- round(nmds$stress,3)
-  label <- bquote(atop(italic(Stress)==.(stress),
-                       italic(P)==.(P_val)))
+  label <- bquote(atop(italic(Stress) ==.(stress),
+                       italic(P) ==.(P_val)))
   
   plot <- ggplot(dat)+
     geom_point(aes(x=NMDS1, y=NMDS2,
