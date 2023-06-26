@@ -1,12 +1,14 @@
-
 # Jialin He 202306
 
-
 CPCOA_plot <- function(microdat,metadata,group,
-                       sample_in_row,title = NULL,
-                       color = NULL,path = NULL,
-                       filename = 'CPCoA',seed = 0,
-                       width = 6.6,height = 5){
+                       sample_in_row = T,
+                       title = NULL,
+                       color = NULL,
+                       path = NULL,
+                       filename = 'CPCoA',
+                       seed = 0,
+                       width = 6.6,
+                       height = 5){
   
   if(!require(pacman))install.packages(pacman)
   pacman::p_load(tidyverse,vegan,car,ggthemes,scico)
@@ -116,7 +118,7 @@ CPCOA_plot <- function(microdat,metadata,group,
       #          x = xmax*0.9, y = xmax*0.99, size = 3.6)+
       annotate('text', label = label, 
                x = xmax*0.9, y = ymax*0.95, 
-               size = 3.6, family = 'serif')+
+               size = 4.2, family = 'serif')+
       theme_bw()+
       theme(legend.key = element_blank(),
             plot.title = element_text(family = "serif",size=15),
