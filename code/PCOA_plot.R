@@ -1,12 +1,15 @@
-
 # Jialin He edited in 202306
 
-
 PCOA_plot <- function(microdat,metadata,group,
-                      sample_in_row,title = NULL,
-                      color = NULL,path = NULL,
-                      filename = 'PCoA',seed = 0,
-                      width = 6.6,height = 5){
+                      sample_in_row = T,
+                      signif_method = 'adonis',
+                      title = NULL,
+                      color = NULL,
+                      path = NULL,
+                      filename = 'PCoA',
+                      seed = 0,
+                      width = 6.6,
+                      height = 5){
   if(!require(pacman))install.packages(pacman)
   pacman::p_load(tidyverse,ggpubr,vegan,car,ggthemes,scico)
 
@@ -29,14 +32,24 @@ PCOA_plot <- function(microdat,metadata,group,
     stop('ERROR: only one level in your group')
   }else{
     # calculate P value
+    
     set.seed(seed)
-    Permanova <- adonis2(microdat~group_in_function,
-                         data = metadata,
-                         distance = 'bray', permutations = 999)
-    p.val <- round(Permanova[1,5],3)
-    variance <- round(Permanova[1,3]*100,2)
-    variance <- paste0(variance,'%')
-    label <- bquote(atop(R^2 == .(variance),  italic(P)==.(p.val)))
+    if(signif_method == 'anosim'){
+      anosim <- anosim(microdat,metadata$group_in_function,
+                       permutations = 999,distance = 'bray')
+      P_val <- anosim$signif %>% round(.,3)
+      statistic <- anosim$statistic %>% round(.,3)
+      label <- bquote(atop(R ==.(statistic),
+                           italic(P)==.(P_val)))
+    }else if(signif_method == 'adonis'){
+      adonis <- adonis2(microdat~group_in_function,data = metadata,
+                        permutations = 999,method = 'bray')
+      P_val <- adonis[1,5] %>% round(.,3)
+      statistic <- (adonis[1,3]*100) %>% round(.,3)
+      statistic <- paste0(statistic,'%')
+      label <- bquote(atop(R^2 ==.(statistic),
+                           italic(P)==.(P_val)))
+    }
     
     # PCOA
     
@@ -103,7 +116,7 @@ PCOA_plot <- function(microdat,metadata,group,
     scale_color_manual(values = color)+
     annotate('text', label = label, 
              x = xmax*0.9, y = ymax*0.95, 
-             size = 3.6, family = 'serif')+
+             size = 4.2, family = 'serif')+
     theme_bw()+
     theme(legend.key = element_blank(),
           plot.title = element_text(family = "serif",size=15),
@@ -124,3 +137,4 @@ PCOA_plot <- function(microdat,metadata,group,
   
   return(plot)
 }
+
