@@ -4,13 +4,14 @@ NMDS <- function(microdat,
                  metadata,
                  group,
                  sample_in_row = T,
-                 title = NULL,
-                 color = NULL,
-                 path = NULL,
                  distance = 'bray',
                  k = 2,try = 20,trymax = 50,
                  autotransform = T,
                  parallel = 4,
+                 signif_method = 'adonis',
+                 title = NULL,
+                 color = NULL,
+                 path = NULL,
                  filename = 'NMDS',
                  seed = 0,
                  width = 6.6,
@@ -78,8 +79,24 @@ NMDS <- function(microdat,
   ymin <- min(ymin)
   ymax <- max(ymax)
   
+  
+  set.seed(seed)
+  if(signif_method == 'anosim'){
+    anosim <- anosim(microdat,dat$group_in_function,
+                     permutations = 999,distance = 'bray')
+    P_val <- anosim$signif %>% round(.,3)
+    statistic <- anosim$statistic %>% round(.,3)
+  }else if(signif_method == 'adonis'){
+    adonis <- adonis2(microdat~group_in_function,data = dat,
+                      permutations = 999,method = 'bray')
+    P_val <- adonis[1,5] %>% round(.,3)
+    statistic <- (adonis[1,3]*100) %>% round(.,3)
+    statistic <- paste0(statistic,'%')
+  }
+  
   stress <- round(nmds$stress,3)
-  label <- bquote(atop(italic(Stress)==.(stress)))
+  label <- bquote(atop(italic(Stress)==.(stress),
+                       italic(P)==.(P_val)))
   
   plot <- ggplot(dat)+
     geom_point(aes(x=NMDS1, y=NMDS2,
@@ -119,5 +136,4 @@ NMDS <- function(microdat,
   
   return(plot)
 }
-
 
