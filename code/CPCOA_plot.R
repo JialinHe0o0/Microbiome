@@ -93,7 +93,7 @@ CPCOA_plot <- function(microdat,metadata,group,
     ymax <- max(ymax)
     
     variance <- paste0(variance,'%')
-    label <- bquote(atop(R^2 == .(variance),  italic(P)==.(p.val)))
+    label <- bquote(atop(R^2 == .(variance),  italic(P) ==.(p.val)))
     
     # plot CPCoA 1 and 2
     plot <- ggplot(points, aes(x = CAP1, y = CAP2, 
