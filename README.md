@@ -4,6 +4,8 @@
 
 \# 练习时长两年半，报错了必须是你的问题 o.0
 
+\# 我不信哥哥会塌房，生物老师没教过你生殖隔离吗？
+
 ## diversity-code
 
 \# **metadata的row.names必须为sample ID**
@@ -67,7 +69,7 @@ PCOA_plot(microdat = ,# 菌群特征表
           title = NULL,# 图标题，可以为空
           color = NULL,# 可以为空
           seed = 0,# 可以为空
-          signif_method = , # adonis、anosim
+          signif_method = , # adonis、anosim，可以为空
           path = NULL,# 可以为空，保存pdf文件的路径，空即不输出到路径
           filename = 'PCOA',# 'PCOA'
           width = ,# plot宽度
@@ -99,7 +101,7 @@ NMDS(microdat = ,
      k = ,try = ,trymax = , # metaMDS()的参数，已有默认设置，可以为空
      autotransform = , # metaMDS()的参数，已有默认设置，可以为空
      parallel = ,
-     signif_method = , # adonis、anosim
+     signif_method = , # adonis、anosim，可以为空
      filename = ,
      seed = ,
      width = ,
