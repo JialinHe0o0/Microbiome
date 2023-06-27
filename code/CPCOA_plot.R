@@ -2,13 +2,16 @@
 
 CPCOA_plot <- function(microdat,metadata,group,
                        sample_in_row = T,
+                       distance = 'bray',
+                       parallel = 4,
                        title = NULL,
                        color = NULL,
+                       legend.position = 'top',
                        path = NULL,
                        filename = 'CPCoA',
                        seed = 0,
                        width = 6.6,
-                       height = 5){
+                       height = 5.1){
   
   if(!require(pacman))install.packages(pacman)
   pacman::p_load(tidyverse,vegan,car,ggthemes,scico)
@@ -17,12 +20,14 @@ CPCOA_plot <- function(microdat,metadata,group,
     microdat <- t(microdat) %>% as.data.frame()
   }
   
+  metadata <- metadata[row.names(metadata) %in% row.names(microdat),]
   id <- row.names(metadata)
+  microdat <- microdat[id,]
   
   colnames(metadata)[colnames(metadata)==group] <- 'group_in_function'
   
-  # bray matrix
-  bray_dis <- vegdist(microdat, method = 'bray') %>% as.matrix()
+  # distance matrix
+  dis_mat <- vegdist(microdat, method = distance) %>% as.matrix()
   
   len <- length(unique(metadata$group_in_function))
   
@@ -43,12 +48,13 @@ CPCOA_plot <- function(microdat,metadata,group,
     }
     
     # Constrained analysis OTU table by genotype
-    capscale.gen = capscale(as.dist(bray_dis) ~ group_in_function, 
+    capscale.gen = capscale(as.dist(dis_mat) ~ group_in_function, 
                             data=metadata, add=F, sqrt.dist=T)
     
     # ANOVA-like permutation analysis, calculate P value
     set.seed(seed)
-    perm_anova.gen = anova.cca(capscale.gen, permutations = 1000, parallel = 4)
+    perm_anova.gen = anova.cca(capscale.gen, permutations = 1000, 
+                               parallel = parallel)
     p.val = round(perm_anova.gen[1,4],3)
     
     # generate variability tables and calculate confidence intervals for the variance
@@ -56,7 +62,7 @@ CPCOA_plot <- function(microdat,metadata,group,
     eig = capscale.gen$CCA$eig
     
     # 解释度
-    variance = round(var_tbl.gen["constrained", "proportion"]*100,2)
+    variance = round(var_tbl.gen["constrained", "proportion"]*100,3)
 
     
     # extract the weighted average (sample) scores
@@ -121,6 +127,7 @@ CPCOA_plot <- function(microdat,metadata,group,
                size = 4.2, family = 'serif')+
       theme_bw()+
       theme(legend.key = element_blank(),
+            legend.position = legend.position,
             plot.title = element_text(family = "serif",size=15),
             axis.title.x= element_text(family = "serif",size=15),
             axis.title.y= element_text(family = "serif",size=15),
