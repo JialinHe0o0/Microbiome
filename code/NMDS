@@ -11,11 +11,12 @@ NMDS <- function(microdat,
                  signif_method = 'adonis',
                  title = NULL,
                  color = NULL,
+                 legend.position = 'top',
                  path = NULL,
                  filename = 'NMDS',
                  seed = 0,
                  width = 6.6,
-                 height = 5){
+                 height = 5.1){
   
   if(!require(pacman))install.packages(pacman)
   pacman::p_load(tidyverse,ggpubr,vegan,car,ggthemes,scico)
@@ -24,8 +25,11 @@ NMDS <- function(microdat,
     microdat <- t(microdat) %>% as.data.frame()
   }
   
+  metadata <- metadata[row.names(metadata) %in% row.names(microdat),]
   id <- row.names(metadata)
   microdat <- microdat[id,]
+  
+  colnames(metadata)[colnames(metadata) == group] <- 'group_in_function'
   
   set.seed(seed)
   nmds <- metaMDS(microdat,distance = distance,k = k,
@@ -41,9 +45,7 @@ NMDS <- function(microdat,
   # points(nmds,cex = goodness*100)
   
   nmds_dat <- as.data.frame(scores(nmds)$site)
-  dat <- merge(nmds_dat,metadata,by = 'row.names')
-  colnames(dat)[colnames(dat) == group] <- 'group_in_function'
-  
+  dat <- cbind(metadata,nmds_dat)
   len <- length(unique(dat$group_in_function))
   
   if(len<2){
@@ -82,16 +84,22 @@ NMDS <- function(microdat,
   
   set.seed(seed)
   if(signif_method == 'anosim'){
+    
     anosim <- anosim(microdat,dat$group_in_function,
-                     permutations = 999,distance = 'bray')
+                     permutations = 999,distance = distance,
+                     parallel = parallel)
     P_val <- anosim$signif %>% round(.,3)
     statistic <- anosim$statistic %>% round(.,3)
+    
   }else if(signif_method == 'adonis'){
+    
     adonis <- adonis2(microdat~group_in_function,data = dat,
-                      permutations = 999,method = 'bray')
+                      permutations = 999,method = distance,
+                      parallel = parallel)
     P_val <- adonis[1,5] %>% round(.,3)
     statistic <- (adonis[1,3]*100) %>% round(.,3)
     statistic <- paste0(statistic,'%')
+    
   }
   
   stress <- round(nmds$stress,3)
@@ -118,6 +126,7 @@ NMDS <- function(microdat,
              size = 4.2, family = 'serif')+
     theme_bw()+
     theme(legend.key = element_blank(),
+          legend.position = legend.position,
           plot.title = element_text(family = "serif",size=15),
           axis.title.x= element_text(family = "serif",size=15),
           axis.title.y= element_text(family = "serif",size=15),
