@@ -25,6 +25,7 @@ alpha_diversity <- function(microdat,
   # 去除所有样本都为0的OTU/ASV/Species/Genus etc.
   microdat <- microdat[,colSums(microdat)>0]
   
+  metadata <- metadata[row.names(metadata) %in% row.names(microdat),]
   id <- row.names(metadata)
   microdat <- microdat[id,]
   
