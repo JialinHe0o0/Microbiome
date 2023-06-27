@@ -3,13 +3,16 @@
 PCOA_plot <- function(microdat,metadata,group,
                       sample_in_row = T,
                       signif_method = 'adonis',
+                      distance = 'bray',
+                      parallel =4,
                       title = NULL,
                       color = NULL,
+                      legend.position = 'top',
                       path = NULL,
                       filename = 'PCoA',
                       seed = 0,
                       width = 6.6,
-                      height = 5){
+                      height = 5.1){
   if(!require(pacman))install.packages(pacman)
   pacman::p_load(tidyverse,ggpubr,vegan,car,ggthemes,scico)
 
@@ -17,6 +20,7 @@ PCOA_plot <- function(microdat,metadata,group,
     microdat <- t(microdat) %>% as.data.frame()
   }
   
+  metadata <- metadata[row.names(metadata) %in% row.names(microdat),]
   id <- row.names(metadata)
   microdat <- microdat[id,]
 
@@ -35,15 +39,19 @@ PCOA_plot <- function(microdat,metadata,group,
     
     set.seed(seed)
     if(signif_method == 'anosim'){
+      
       anosim <- anosim(microdat,metadata$group_in_function,
-                       permutations = 999,distance = 'bray')
+                       permutations = 999,distance = distance,
+                       parallel = parallel)
       P_val <- anosim$signif %>% round(.,3)
       statistic <- anosim$statistic %>% round(.,3)
       label <- bquote(atop(R ==.(statistic),
                            italic(P) ==.(P_val)))
     }else if(signif_method == 'adonis'){
+      
       adonis <- adonis2(microdat~group_in_function,data = metadata,
-                        permutations = 999,method = 'bray')
+                        permutations = 999,method = distance,
+                        parallel = parallel)
       P_val <- adonis[1,5] %>% round(.,3)
       statistic <- (adonis[1,3]*100) %>% round(.,3)
       statistic <- paste0(statistic,'%')
@@ -53,8 +61,8 @@ PCOA_plot <- function(microdat,metadata,group,
     
     # PCOA
     
-    # bray matrix
-    pcoa_dis <- vegdist(microdat, method = 'bray')
+    # distance matrix
+    pcoa_dis <- vegdist(microdat, method = distance)
     
     pcoa <- cmdscale(pcoa_dis, k = (nrow(microdat) - 1), eig = TRUE)
     
@@ -119,6 +127,7 @@ PCOA_plot <- function(microdat,metadata,group,
              size = 4.2, family = 'serif')+
     theme_bw()+
     theme(legend.key = element_blank(),
+          legend.position = legend.position,
           plot.title = element_text(family = "serif",size=15),
           axis.title.x= element_text(family = "serif",size=15),
           axis.title.y= element_text(family = "serif",size=15),
@@ -137,4 +146,3 @@ PCOA_plot <- function(microdat,metadata,group,
   
   return(plot)
 }
-
