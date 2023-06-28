@@ -143,7 +143,7 @@ PCOA_plot <- function(microdat,metadata,group,
            width = width,height = height)
   }
 
-  names(PC) <- c('pcoa1','pcoa2',group)
+  names(PC) <- c('PCoA1','PCoA2',group)
   
   list <- list(plot = plot,
                dat = PC)
