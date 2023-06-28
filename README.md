@@ -146,5 +146,11 @@ res <- CPCOA_plot(microdat, metadata, group = 'DM', sample_in_row = T)
 res
 ```
 
+- **beta_plus()**
+
+\# 基于betapart: https://doi.org/10.1111/j.2041-210X.2012.00224.x
+
+\# 你可曾听过beta diversity的分解
+
 
 
