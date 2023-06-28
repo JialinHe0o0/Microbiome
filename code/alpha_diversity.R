@@ -1,10 +1,8 @@
-
 # Jialin He edited in 202306
-
 
 alpha_diversity <- function(microdat,
                             metadata,group,
-                            sample_in_row,
+                            sample_in_row = T,
                             plot_index = 'Shannon',
                             p.adj = T,
                             p.signif = T,
@@ -93,8 +91,11 @@ alpha_diversity <- function(microdat,
     colnames(mer)[colnames(mer)==plot_index] <- 'y'
     stat.test <- compare_means(y~group_in_function,
                                p.adjust.method = 'BH',
+                               symnum.args = list(cutpoints = c(-Inf,0.001,0.01,0.05,Inf), 
+                                                  symbols = c('***','**','*','ns')),
                                data = mer,method = 'wilcox.test') %>% 
-      add_significance()
+      add_significance(cutpoints = c(-Inf,0.001,0.01,0.05,Inf),
+                       symbols = c('***','**','*','ns'))
     
     if(p.signif){
       label <- signif
@@ -147,3 +148,4 @@ alpha_diversity <- function(microdat,
   
   return(list)
 }
+
