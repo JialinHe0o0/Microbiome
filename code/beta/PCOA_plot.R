@@ -142,6 +142,8 @@ PCOA_plot <- function(microdat,metadata,group,
            filename = paste0(path,'/',filename,'_plot.pdf'),
            width = width,height = height)
   }
+
+  names(PC) <- c('pcoa1','pcoa2',group)
   
   list <- list(plot = plot,
                dat = PC)
