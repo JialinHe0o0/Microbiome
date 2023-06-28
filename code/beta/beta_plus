@@ -3,7 +3,7 @@
 beta_plus <- function(microdat,
                       metadata,
                       group,
-                      sample_in_row,
+                      sample_in_row = T,
                       method = 'presence',
                       p.adj = T,
                       p.signif = T,
@@ -186,7 +186,9 @@ beta_plus <- function(microdat,
                        tip.length = 0.02,label = label)
   
   list <- list(plot1 = plot1,
-               plot2 = plot2)
+               plot2 = plot2,
+               dat1 = dat1,
+               dat2 = dat2)
   
   if(!is.null(path)){
     ggsave(plot = plot1,
@@ -200,6 +202,3 @@ beta_plus <- function(microdat,
   return(list)
   
 }
-
-
-
