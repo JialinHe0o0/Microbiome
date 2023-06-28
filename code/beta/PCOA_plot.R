@@ -60,7 +60,6 @@ PCOA_plot <- function(microdat,metadata,group,
     }
     
     # PCOA
-    
     # distance matrix
     pcoa_dis <- vegdist(microdat, method = distance)
     
@@ -70,12 +69,12 @@ PCOA_plot <- function(microdat,metadata,group,
     pcoa1 <- paste('PCoA1 :', round(100*pcoa_exp[1], 2), '%')
     pcoa2 <- paste('PCoA2 :', round(100*pcoa_exp[2], 2), '%')
     
-    site <- data.frame(pcoa$point)[1:2]
-    site <- cbind.data.frame(site,metadata)
-    names(site)[1:2] <- c('pcoa1', 'pcoa2')
+    PC <- data.frame(pcoa$point)[1:2]
+    PC <- cbind.data.frame(PC,metadata$group_in_function)
+    names(PC) <- c('pcoa1','pcoa2','group_in_function')
     
     group_average <- aggregate(cbind(pcoa1, pcoa2)~group_in_function, 
-                               data = site, FUN = mean)
+                               data = PC, FUN = mean)
     
     xmin <- NULL
     xmax <- NULL
@@ -83,7 +82,7 @@ PCOA_plot <- function(microdat,metadata,group,
     ymax <- NULL
     
     for(i in unique(metadata$group_in_function)){
-      temp <- site[site$group_in_function == i,]
+      temp <- PC[PC$group_in_function == i,]
       eli <- dataEllipse(x = temp$pcoa1,y = temp$pcoa2,
                          levels = 0.95,draw = F) %>% as.data.frame()
       xmint <- min(eli$x)
@@ -103,7 +102,7 @@ PCOA_plot <- function(microdat,metadata,group,
     ymax <- max(ymax)
   }
   
-  plot <- ggplot(site)+
+  plot <- ggplot(PC)+
     geom_point(aes(x=pcoa1, y=pcoa2,
                    color = group_in_function),
                size = 0.8)+
@@ -144,5 +143,10 @@ PCOA_plot <- function(microdat,metadata,group,
            width = width,height = height)
   }
   
-  return(plot)
+  list <- list(plot = plot,
+               dat = PC)
+  
+  return(list)
 }
+
+
