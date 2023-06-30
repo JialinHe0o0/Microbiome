@@ -48,7 +48,7 @@ res$data
 # 返回ggplot图
 res$plot
 ```
-![[]]
+![AVD plot](https://github.com/JialinHe0o0/diversity-code/blob/main/code/plot/diversity_plot.png)
 ----
 
 ### β多样性
@@ -84,6 +84,10 @@ res <- PCOA_plot(microdat, metadata, group = 'DM', sample_in_row = T)
 res
 ```
 
+- **PCoA_plus()**
+
+![](https://github.com/JialinHe0o0/diversity-code/blob/main/code/plot/PCoA_plus_plot.png)
+
 - **NMDS()**
 
 非度量多维排列 (Non-metric multidimensional scaling, NMDS)
@@ -115,6 +119,8 @@ example
 res <- NMDS(microdat, metadata, group = 'DM', sample_in_row = T)
 ```
 
+![NMDS](https://github.com/JialinHe0o0/diversity-code/blob/main/code/plot/NMDS_plot.png)
+
 
 \# 限制性，类似于有监督
 
@@ -143,6 +149,7 @@ res <- CPCOA_plot(microdat, metadata, group = 'DM', sample_in_row = T)
 
 res
 ```
+![CPCoA](https://github.com/JialinHe0o0/diversity-code/blob/main/code/plot/CPCoA_plot.png)
 
 - **beta_plus()**
 
@@ -150,5 +157,7 @@ res
 
 \# 你可曾听过beta diversity的分解
 
+![turnover](https://github.com/JialinHe0o0/diversity-code/blob/main/code/plot/beta1_plot.png)
+![nestedness](https://github.com/JialinHe0o0/diversity-code/blob/main/code/plot/beta2_plot.png)
 
 
