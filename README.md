@@ -37,12 +37,10 @@ alpha_diversity(microdat = ,# 菌群特征表
 
 example:
 ```
-res <- alpha_diversity(microdat = bacteria,
-                       metadata = metadata,
-                       group = 'Group',
-                       sample_in_row = T,p.adj = T,
-                       title = 'Example',p.signif = T,
-                       color = color[1:5])
+res <- alpha_diversity(css_g,metadata,group = 'test',sample_in_row = T,
+                       color = color,plot_index = 'AVD',
+                       p.adj = T,p.signif = T,
+                       path = 'C://Users//He_Jialin//Desktop/')
 
 # 返回sample ID、全部指数、分组的表格
 res$data
@@ -50,7 +48,7 @@ res$data
 # 返回ggplot图
 res$plot
 ```
-
+![[]]
 ----
 
 ### β多样性
