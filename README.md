@@ -40,7 +40,7 @@ example:
 res <- alpha_diversity(css_g,metadata,group = 'test',sample_in_row = T,
                        color = color,plot_index = 'AVD',
                        p.adj = T,p.signif = T,
-                       path = 'C://Users//He_Jialin//Desktop/')
+                       path = 'C://xx/')
 
 # 返回sample ID、全部指数、分组的表格
 res$data
@@ -79,7 +79,8 @@ PCOA_plot(microdat = ,# 菌群特征表
 example:
 
 ```
-res <- PCOA_plot(microdat, metadata, group = 'DM', sample_in_row = T)
+res <- PCOA_plot(css_g,metadata,group = 'test',sample_in_row = T,
+                 color = color,path = 'C://xx/')
 
 res
 ```
@@ -116,7 +117,9 @@ NMDS(microdat = ,
 example
 
 ```ruby
-res <- NMDS(microdat, metadata, group = 'DM', sample_in_row = T)
+res <- NMDS(css_g,metadata,group = 'test',sample_in_row = T,
+            signif_method = 'anosim',color = color,
+            path = 'C://xx/')
 ```
 
 ![NMDS](https://github.com/JialinHe0o0/diversity-code/blob/main/code/plot/NMDS_plot.png)
@@ -145,7 +148,8 @@ CPCOA_plot(microdat = ,# 菌群特征表
 example:
 
 ```
-res <- CPCOA_plot(microdat, metadata, group = 'DM', sample_in_row = T)
+res <- CPCOA_plot(css_g,metadata,group = 'test',sample_in_row = T,
+                  color = color,path = 'C://xx/')
 
 res
 ```
