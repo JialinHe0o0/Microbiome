@@ -82,10 +82,14 @@ example:
 res <- PCOA_plot(css_g,metadata,group = 'test',sample_in_row = T,
                  color = color,path = 'C://xx/')
 
-res
+res$plot
 ```
 
+![PCoA](https://github.com/JialinHe0o0/diversity-code/blob/main/code/plot/PCoA_plot.png)
+
 - **PCoA_plus()**
+
+  \# 不想给示例嘿嘿
 
 ![](https://github.com/JialinHe0o0/diversity-code/blob/main/code/plot/PCoA_plus_plot.png)
 
@@ -120,6 +124,8 @@ example
 res <- NMDS(css_g,metadata,group = 'test',sample_in_row = T,
             signif_method = 'anosim',color = color,
             path = 'C://xx/')
+
+res
 ```
 
 ![NMDS](https://github.com/JialinHe0o0/diversity-code/blob/main/code/plot/NMDS_plot.png)
@@ -147,7 +153,7 @@ CPCOA_plot(microdat = ,# 菌群特征表
 
 example:
 
-```
+```ruby
 res <- CPCOA_plot(css_g,metadata,group = 'test',sample_in_row = T,
                   color = color,path = 'C://xx/')
 
