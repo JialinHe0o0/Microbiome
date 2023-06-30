@@ -89,7 +89,7 @@ res$plot
 
 - **PCoA_plus()**
 
-  \# 不想给示例嘿嘿
+  \# 你猜我放哪了
 
 ![](https://github.com/JialinHe0o0/diversity-code/blob/main/code/plot/PCoA_plus_plot.png)
 
@@ -166,6 +166,8 @@ res
 \# 基于betapart: https://doi.org/10.1111/j.2041-210X.2012.00224.x
 
 \# 你可曾听过beta diversity的分解
+
+\# 又是plus嘻嘻嘻
 
 ![turnover](https://github.com/JialinHe0o0/diversity-code/blob/main/code/plot/beta1_plot.png)
 ![nestedness](https://github.com/JialinHe0o0/diversity-code/blob/main/code/plot/beta2_plot.png)
