@@ -83,7 +83,7 @@ res <- PCOA_plot(css_g,metadata,group = 'test',sample_in_row = T,
 
 res$plot
 ```
-![PCoA](https://github.com/JialinHe0o0/diversity-code/blob/main/code/plot/PCoA_plot.png)
+![PCoA](https://github.com/JialinHe0o0/Diversity_plus/blob/main/code/plot/PCoA_plot.png)
 
 - **PCoA_plus()**
 
@@ -125,7 +125,7 @@ res <- NMDS(css_g,metadata,group = 'test',sample_in_row = T,
 
 res
 ```
-![NMDS](https://github.com/JialinHe0o0/diversity-code/blob/main/code/plot/NMDS_plot.png)
+![NMDS](https://github.com/JialinHe0o0/Diversity_plus/blob/main/code/plot/NMDS_plot.png)
 
 
 \# 限制性，类似于有监督
@@ -156,7 +156,7 @@ res <- CPCOA_plot(css_g,metadata,group = 'test',sample_in_row = T,
 
 res
 ```
-![CPCoA](https://github.com/JialinHe0o0/diversity-code/blob/main/code/plot/CPCoA_plot.png)
+![CPCoA](https://github.com/JialinHe0o0/Diversity_plus/blob/main/code/plot/CPCoA_plot.png)
 
 - **beta_plus()**
 
