@@ -1,0 +1,54 @@
+# Jialin He 202307
+
+PERMANOVA_R2 <- function(microdat,
+                         metadata,
+                         sample_in_row = T,
+                         variable,
+                         parallel =4,
+                         P.adj = F){
+  if(!require(pacman))install.packages(pacman)
+  pacman::p_load(tidyverse,vegan)
+  if(sample_in_row == F){
+    microdat <- t(microdat) %>% as.data.frame()
+  }
+  metadata <- metadata[row.names(metadata) %in% row.names(microdat),]
+  id <- row.names(metadata)
+  microdat <- microdat[id,]
+  
+  P <- c()
+  F_value <- c()
+  R2 <- c()
+  
+  for(i in variable){
+    meta <- metadata
+    colnames(meta)[colnames(meta)==i] <- 'group'
+    meta <- meta[!is.na(meta$group),]
+    micro <- microdat[row.names(meta),]
+    set.seed(0)
+    temp <- adonis2(micro~group,meta,parallel = parallel,
+                    permutations = 999,method = 'bray')
+    
+    R2[i] <- temp[1,3]
+    F_value[i] <- temp[1,4]
+    P[i] <- temp[1,5]
+  }
+  data <- data.frame(variable = variable,
+                     R2 = R2,
+                     F_value = F_value,
+                     P = P)
+  data$P_adj <- p.adjust(data$P,method = 'BH')
+  
+  if(P.adj){
+    # 根据校正后的P或原始P添加显著性标签
+    data$label <- ifelse(data$P_adj==0.001,'***',
+                         ifelse(data$P_adj>0.001 & data$P_adj<0.01,'**',
+                                ifelse(data$P_adj>=0.05,'','*')))
+  }else{
+    data$label <- ifelse(data$P==0.001,'***',
+                         ifelse(data$P>0.001 & data$P<0.01,'**',
+                                ifelse(data$P>=0.05,'','*')))
+  }
+  
+  return(data)
+}
+
