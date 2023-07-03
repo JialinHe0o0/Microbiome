@@ -48,7 +48,6 @@ res$data
 # 返回ggplot图
 res$plot
 ```
-![AVD plot](https://github.com/JialinHe0o0/diversity-code/blob/main/code/plot/diversity_plot.png)
 ----
 
 ### β多样性
@@ -84,14 +83,13 @@ res <- PCOA_plot(css_g,metadata,group = 'test',sample_in_row = T,
 
 res$plot
 ```
-
 ![PCoA](https://github.com/JialinHe0o0/diversity-code/blob/main/code/plot/PCoA_plot.png)
 
 - **PCoA_plus()**
 
   \# 你猜我放哪了
 
-![](https://github.com/JialinHe0o0/diversity-code/blob/main/code/plot/PCoA_plus_plot.png)
+![](https://github.com/JialinHe0o0/Diversity_plus/blob/main/code/plot/PCoA_plus_plot.png)
 
 - **NMDS()**
 
@@ -127,7 +125,6 @@ res <- NMDS(css_g,metadata,group = 'test',sample_in_row = T,
 
 res
 ```
-
 ![NMDS](https://github.com/JialinHe0o0/diversity-code/blob/main/code/plot/NMDS_plot.png)
 
 
@@ -169,7 +166,6 @@ res
 
 \# 又是plus嘻嘻嘻
 
-![turnover](https://github.com/JialinHe0o0/diversity-code/blob/main/code/plot/beta1_plot.png)
-![nestedness](https://github.com/JialinHe0o0/diversity-code/blob/main/code/plot/beta2_plot.png)
-
+![turnover](https://github.com/JialinHe0o0/Diversity_plus/blob/main/code/plot/beta1.png)
+![nestedness](https://github.com/JialinHe0o0/Diversity_plus/blob/main/code/plot/beta2.png)
 
