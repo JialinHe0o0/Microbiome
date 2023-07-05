@@ -87,7 +87,7 @@ res$plot
 
 - **bray_dissimilarity()**
 
-嘻嘻，你觉得相异距离多样性只能用主成分展示吗
+嘻嘻，你觉得相异距离只能用主成分展示吗
 
 ![bray-curtis](https://github.com/JialinHe0o0/Diversity_plus/blob/main/code/plot/bray_curtis_plot.png)
 
