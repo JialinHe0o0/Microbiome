@@ -85,6 +85,12 @@ res$plot
 ```
 ![PCoA](https://github.com/JialinHe0o0/Diversity_plus/blob/main/code/plot/PCoA_plot.png)
 
+- **bray_dissimilarity()**
+
+嘻嘻，你觉得相异距离多样性只能用主成分展示吗
+
+![bray-curtis](https://github.com/JialinHe0o0/Diversity_plus/blob/main/code/plot/bray_curtis_plot.png)
+
 - **PCoA_plus()**
 
   \# 你猜我放哪了
