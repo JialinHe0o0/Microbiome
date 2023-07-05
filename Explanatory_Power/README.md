@@ -25,6 +25,7 @@ mantel_function(microdat, # 菌群特征表，也就是待分析的群落
 ```
 
 rbreak, rlabel, pbreak, plabel并不重要，只是后续作图时，可以用切割后的r, P值来规定曲线颜色、类型等，方便展示
+
 完全可以出结果后修改
 
 example
