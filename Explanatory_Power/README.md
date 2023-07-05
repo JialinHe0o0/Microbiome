@@ -37,6 +37,11 @@ res <- mantel_function(microdat = css_g,metadata = table1,var = var,
                        community_name = 'Fungi')
 ```
 
+最终绘图
+
+![Mantel_test](https://github.com/JialinHe0o0/Microbiome/blob/main/plot/Mantel.png)
+
+
 
 
 
