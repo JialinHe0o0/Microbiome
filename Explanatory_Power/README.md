@@ -32,9 +32,20 @@ example
 
 ```ruby
 var <- c('age','BMI','TG','TC','HDL','LDL')
-res <- mantel_function(microdat = css_g,metadata = table1,var = var,
-                       method = 'spearman',sample_in_row = T,
-                       community_name = 'Fungi')
+
+res <- mantel_function(microdat = asv_css,metadata = table1,var = var,
+                       method = 'pearson',sample_in_row = T,
+                       community_name = 'Fungi',
+                       rbreak = c(-Inf,0.05,0.1,Inf),
+                       rlabel = c('<0.05','0.05-0.1','>0.1'))
+
+res2 <- mantel_function(microdat = bac_species,
+                        metadata = table1,var = var,
+                        method = 'pearson',sample_in_row = T,
+                        community_name = 'Bacteria',
+                        rbreak = c(-Inf,0.05,0.1,Inf),
+                        rlabel = c('<0.05','0.05-0.1','>0.1'))
+
 ```
 
 最终绘图
