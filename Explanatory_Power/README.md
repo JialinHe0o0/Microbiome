@@ -50,6 +50,8 @@ res2 <- mantel_function(microdat = bac_species,
 
 最终绘图
 
+参数自有道理
+
 ![Mantel_test](https://github.com/JialinHe0o0/Microbiome/blob/main/plot/Mantel.png)
 
 
