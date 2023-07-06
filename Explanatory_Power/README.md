@@ -20,8 +20,8 @@ mantel_function(microdat, # 菌群特征表，也就是待分析的群落
                 seed = 0,
                 rbreak = c(-Inf,0.2,0.4,Inf), # 相关系数切点，方便后续作为图形的legend
                 rlabel = c("<0.2","0.2-0.4",">=0.4"),
-                pbreak = c(-Inf,0.01,0.05,Inf),  # P值切点，方便后续作为图形的legend
-                plabel = c("<0.01","0.01-0.05",">=0.05"))
+                pbreak = c(-Inf,0.001,0.01,0.05,Inf),  # P值切点，方便后续作为图形的legend
+                plabel = c("<0.001","<0.01","<0.05",">0.05"))
 ```
 
 rbreak, rlabel, pbreak, plabel并不重要，只是后续作图时，可以用切割后的r, P值来规定曲线颜色、类型等，方便展示
@@ -52,7 +52,7 @@ res2 <- mantel_function(microdat = bac_species,
 
 参数自有道理
 
-![Mantel_test](https://github.com/JialinHe0o0/Microbiome/blob/main/plot/Mantel.png)
+![Mantel_test](https://github.com/JialinHe0o0/Microbiome/blob/main/plot/Mantel_test.png)
 
 
 
