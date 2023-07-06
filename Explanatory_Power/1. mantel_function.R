@@ -9,10 +9,10 @@ mantel_function <- function(microdat,
                             permutations = 999,
                             parallel = 4,
                             seed = 0,
-                            rbreak = c(-Inf,0.2,0.4,Inf),
-                            rlabel = c("<0.2","0.2-0.4",">=0.4"),
-                            pbreak = c(-Inf,0.01,0.05,Inf),
-                            plabel = c("<0.01","0.01-0.05",">=0.05")){
+                            rbreak = c(-Inf,0.1,0.2,Inf),
+                            rlabel = c("<0.1","0.1-0.2",">0.2"),
+                            pbreak = c(-Inf,0.001,0.01,0.05,Inf),
+                            plabel = c("<0.001","<0.01","<0.05",">0.05")){
   if(!require(pacman))install.packages(pacman)
   pacman::p_load(tidyverse,vegan)
   
@@ -47,11 +47,16 @@ mantel_function <- function(microdat,
                     variable=var,
                     r=r,
                     p=p)
+  # 以我的经验,r<0的时候就不存在P<0.05的情况
   dat$rlabel <- cut(dat$r,breaks = rbreak,
                     labels = rlabel,
                     include.lowest = TRUE,right = FALSE)
+  
+  # 主要是因为permutation 999，没办法得到<0.001的P
+  # 所以right = T
   dat$plabel <- cut(dat$p,breaks = pbreak,
                     labels = plabel,
-                    include.lowest = TRUE,right = FALSE)
+                    include.lowest = F,right = T)
   return(dat)
 }
+
