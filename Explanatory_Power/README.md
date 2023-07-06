@@ -31,7 +31,7 @@ rbreak, rlabel, pbreak, plabel并不重要，只是后续作图时，可以用�
 example
 
 ```ruby
-var <- c('age','BMI','TG','TC','HDL','LDL')
+var <- c('age','BMI','waist','TG','TC','HDL','LDL')
 
 res <- mantel_function(microdat = asv_css,metadata = table1,var = var,
                        method = 'pearson',sample_in_row = T,
@@ -46,11 +46,17 @@ res2 <- mantel_function(microdat = bac_species,
                         rbreak = c(-Inf,0.05,0.1,Inf),
                         rlabel = c('<0.05','0.05-0.1','>0.1'))
 
+res_all <- rbind(res,res2)
+
+library(linkET)
+# https://github.com/Hy4m/linkET
+# 嘿嘿，不能不劳而获
+
 ```
 
 最终绘图
 
-参数自有道理
+（参数自有道理）
 
 ![Mantel_test](https://github.com/JialinHe0o0/Microbiome/blob/main/plot/Mantel_test.png)
 
