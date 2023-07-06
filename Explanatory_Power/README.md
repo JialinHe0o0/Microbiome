@@ -18,8 +18,8 @@ mantel_function(microdat, # 菌群特征表，也就是待分析的群落
                 permutations = 999,
                 parallel = 4, # 线程
                 seed = 0,
-                rbreak = c(-Inf,0.2,0.4,Inf), # 相关系数切点，方便后续作为图形的legend
-                rlabel = c("<0.2","0.2-0.4",">=0.4"),
+                rbreak = c(-Inf,0.1,0.2,Inf), # 相关系数切点，方便后续作为图形的legend
+                rlabel = c("<0.1","0.1-0.2",">=0.2"),
                 pbreak = c(-Inf,0.001,0.01,0.05,Inf),  # P值切点，方便后续作为图形的legend
                 plabel = c("<0.001","<0.01","<0.05",">0.05"))
 ```
