@@ -48,8 +48,9 @@ res2 <- mantel_function(microdat = bac_species,
 
 res_all <- rbind(res,res2)
 
+# 绘图
 library(linkET)
-# https://github.com/Hy4m/linkET
+# 参考: https://github.com/Hy4m/linkET
 # 嘿嘿，不能不劳而获
 
 ```
