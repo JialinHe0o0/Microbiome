@@ -60,6 +60,8 @@ library(linkET)
 
 ![Mantel_test](https://github.com/JialinHe0o0/Microbiome/blob/main/plot/Mantel_test.png)
 
+怎么解释呢，嘿嘿，自己想
+
 
 
 
