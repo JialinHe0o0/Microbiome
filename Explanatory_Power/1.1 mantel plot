@@ -1,4 +1,4 @@
-1.1 mantel plot
+# jialin He 202307
 
 library(linkET)
 var <- c('age','BMI','waist','TG','TC','HDL','LDL')
