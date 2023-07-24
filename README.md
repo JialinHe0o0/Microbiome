@@ -1,5 +1,13 @@
 # Jialin He
 
-- 哥哥居然可以突破生殖隔离，他为科学界贡献了太多，哪里塌房了
+- **diversity**
 
-- 我有巨物恐惧症，不能接近大傻逼
+Alpha and beta diversity
+
+- **Explanatory_power**
+
+表型与微生物群落变化的关联以及解释度
+
+- **Microbiome_Filter**
+
+根据检出率筛选高丰度菌，以便下一步特征筛选
