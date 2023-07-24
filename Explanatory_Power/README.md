@@ -63,6 +63,33 @@ library(linkET)
 
 怎么解释呢，嘿嘿，自己想
 
+## PERMANOVA_R2()
+
+```ruby
+PERMANOVA_R2(microdat = , # 菌群特征表，也就是待分析的群落
+             metadata = , # 临床数据，row.names需要为sample ID
+             sample_in_row = , # T or F，T即菌群特征表row.names为sample ID
+             variable = , # 特征，例如c('age','BMI','ABSI')
+             parallel = , # 线程
+             P.adj = ) # T or F, 是否根据校正后的P设定标签，如下表label, P<0.001 '***', P<0.01 '**', P<0.05 '*', 是否根据校正后的P判断label
+
+```
+返回包含的表格
+
+|variable|R2|F_value|P|P_adj|label|
+|---|---|---|---|---|---|
+|||||||
+
+example
+
+```ruby
+var <- c('age','BMI','waist','TG','TC','HDL','LDL')
+res <- PERMANOVA_R2(microdat = asv_css,
+                    metadata = metadata,
+                    variable = var,
+                    P.adj = F)
+res
+```
 
 
 
