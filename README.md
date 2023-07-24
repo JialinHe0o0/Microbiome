@@ -10,4 +10,4 @@ Alpha and beta diversity
 
 - [**Microbiome_Filter**](https://github.com/JialinHe0o0/Microbiome/tree/main/Microbiome_Filter)
 
-根据检出率筛选高丰度菌，以便下一步特征筛选
+根据检出率筛选高丰度菌（高检出率），以便下一步特征筛选
