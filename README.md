@@ -1,6 +1,6 @@
 # Jialin He
 
-- **diversity**
+- **diversity** ![](https://github.com/JialinHe0o0/Microbiome/tree/main/Diversity)
 
 Alpha and beta diversity
 
