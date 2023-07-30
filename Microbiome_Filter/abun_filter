@@ -16,7 +16,7 @@ abun_filter <- function(dat,
     dat <- t(t(dat)/rowSums(dat)) %>% as.data.frame()
   }
   
-  dat <- dat[,colMeans(dat)>abundance]
+  dat <- dat[,colMeans(dat)>=abundance]
   
   return(dat)
 }
