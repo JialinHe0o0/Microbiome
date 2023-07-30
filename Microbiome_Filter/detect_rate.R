@@ -3,6 +3,10 @@
 detect_rate <- function(dat,
                         sample_in_row = T,
                         proportion = 0.05){
+
+  if(!require(pacman))install.packages(pacman)
+  pacman::p_load(tidyverse)
+  
   if(sample_in_row == F){
     dat <- t(dat) %>% as.data.frame()
   }
