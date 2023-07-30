@@ -13,7 +13,7 @@ abun_filter <- function(dat,
   }
   
   if(count == T){
-    dat <- t(t(dat)/rowSums(dat)) %>% as.data.frame()
+    dat <- (dat/rowSums(dat)) %>% as.data.frame()
   }
   
   dat <- dat[,colMeans(dat)>=abundance]
