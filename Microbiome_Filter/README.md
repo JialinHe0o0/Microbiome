@@ -2,7 +2,7 @@
 
 ## detect_rate()
 
-基于物种的检出率得到key feature
+基于物种的检出率得到core feature
 
 ```ruby
 detect_rate(dat = , # 物种丰度矩阵，可以是count或任何标准化方法处理后的data
@@ -25,7 +25,7 @@ res$dat
 
 ## abun_filter()
 
-基于物种的平均相对丰度得到key feature
+基于物种的平均相对丰度得到core feature
 
 注意，输入的物种丰度矩阵只能是count或者TSS标准化后的矩阵
 
