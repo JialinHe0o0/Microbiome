@@ -22,7 +22,6 @@
 alpha_diversity(microdat = ,# 菌群特征表
                 metadata = ,# 临床数据，row.names需要为sample ID
                 group = ,# 分组变量
-                sample_in_row = T,# T or F，T即特征表row.names为sample ID
                 plot_index = 'Shannon', # 默认'Shannon'，还有Simpson、Gini_Simpson、Inv_Simpson、Richness、Pielou、equitability、AVD
                 p.adj = T,# T or F，是否校正P值，default = T
                 p.signif = T,# T or F，default = T，T即返回***, **, *, ns，F返回P值
@@ -37,7 +36,7 @@ alpha_diversity(microdat = ,# 菌群特征表
 
 example:
 ```
-res <- alpha_diversity(css_g,metadata,group = 'test',sample_in_row = T,
+res <- alpha_diversity(css_g,metadata,group = 'test',
                        color = color,plot_index = 'AVD',
                        p.adj = T,p.signif = T,
                        path = 'C://xx/')
@@ -62,7 +61,6 @@ res$plot
 PCOA_plot(microdat = ,# 菌群特征表
           metadata = ,# 临床数据，row.names需要为sample ID
           group = ,# 分组变量
-          sample_in_row = T,# T or F，T即特征表row.names为sample ID
           signif_method = , # adonis、anosim，可以为空
           distance = 'bray'
           title = NULL,# 图标题，可以为空
@@ -78,7 +76,7 @@ PCOA_plot(microdat = ,# 菌群特征表
 example:
 
 ```
-res <- PCOA_plot(css_g,metadata,group = 'test',sample_in_row = T,
+res <- PCOA_plot(css_g,metadata,group = 'test',
                  color = color,path = 'C://xx/')
 
 res$plot
@@ -106,7 +104,6 @@ res$plot
 NMDS(microdat = ,
      metadata = ,
      group = ,
-     sample_in_row = ,
      distance = , # metaMDS()的参数，已有默认设置，可以为空
      k = ,try = ,trymax = , # metaMDS()的参数，已有默认设置，可以为空
      autotransform = , # metaMDS()的参数，已有默认设置，可以为空
@@ -125,7 +122,7 @@ NMDS(microdat = ,
 example
 
 ```ruby
-res <- NMDS(css_g,metadata,group = 'test',sample_in_row = T,
+res <- NMDS(css_g,metadata,group = 'test',
             signif_method = 'anosim',color = color,
             path = 'C://xx/')
 
@@ -142,7 +139,6 @@ res
 CPCOA_plot(microdat = ,# 菌群特征表
            metadata = ,# 临床数据，row.names需要为sample ID
            group = ,# 分组变量
-           sample_in_row = T,# T or F，T即特征表row.names为sample ID
            distance = 'bray'
            title = NULL,# 图标题，可以为空
            color = NULL,# 可以为空
@@ -157,7 +153,7 @@ CPCOA_plot(microdat = ,# 菌群特征表
 example:
 
 ```ruby
-res <- CPCOA_plot(css_g,metadata,group = 'test',sample_in_row = T,
+res <- CPCOA_plot(css_g,metadata,group = 'test',
                   color = color,path = 'C://xx/')
 
 res
