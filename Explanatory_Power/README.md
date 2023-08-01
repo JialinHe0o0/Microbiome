@@ -11,7 +11,6 @@
 ```ruby
 mantel_function(microdat, # 菌群特征表，也就是待分析的群落
                 metadata, # 临床数据，row.names需要为sample ID
-                sample_in_row=T, # T or F，T即菌群特征表row.names为sample ID
                 var, # 特征，例如c('age','BMI','ABSI')
                 method = 'pearson', # 'pearman' or 'spearman'
                 community_name='Fungi', # 群落名称
@@ -34,14 +33,14 @@ example
 var <- c('age','BMI','waist','TG','TC','HDL','LDL')
 
 res <- mantel_function(microdat = asv_css,metadata = table1,var = var,
-                       method = 'pearson',sample_in_row = T,
+                       method = 'pearson',
                        community_name = 'Fungi',
                        rbreak = c(-Inf,0.05,0.1,Inf),
                        rlabel = c('<0.05','0.05-0.1','>0.1'))
 
 res2 <- mantel_function(microdat = bac_species,
                         metadata = table1,var = var,
-                        method = 'pearson',sample_in_row = T,
+                        method = 'pearson',
                         community_name = 'Bacteria',
                         rbreak = c(-Inf,0.05,0.1,Inf),
                         rlabel = c('<0.05','0.05-0.1','>0.1'))
@@ -68,7 +67,6 @@ library(linkET)
 ```ruby
 PERMANOVA_R2(microdat = , # 菌群特征表，也就是待分析的群落
              metadata = , # 临床数据，row.names需要为sample ID
-             sample_in_row = , # T or F，T即菌群特征表row.names为sample ID
              variable = , # 特征，例如c('age','BMI','ABSI')
              parallel = , # 线程
              P.adj = ) # T or F, 是否根据校正后的P设定标签，如下表label, P<0.001 '***', P<0.01 '**', P<0.05 '*', 是否根据校正后的P判断label
