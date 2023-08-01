@@ -1,8 +1,7 @@
-# Jialin He edited in 202306
+# Jialin He edited in 202308
 
 alpha_diversity <- function(microdat,
                             metadata,group,
-                            sample_in_row = T,
                             plot_index = 'Shannon',
                             p.adj = T,
                             p.signif = T,
@@ -15,6 +14,20 @@ alpha_diversity <- function(microdat,
   
   if(!require(pacman))install.packages(pacman)
   pacman::p_load(tidyverse,ggpubr,rstatix,vegan,scico)
+
+  if(sum(sapply(microdat,is.numeric))!=ncol(microdat)){
+    stop('ERROR: Only numeric values can be included in the microdat')
+  }
+  
+  if(sum(row.names(metadata) %in% row.names(microdat))>0){
+    sample_in_row = T
+    print('Sample ID in row')
+  }else if(sum(row.names(metadata) %in% colnames(microdat))>0){
+    sample_in_row = F
+    print('Sample ID in col')
+  }else{
+    stop('ERROR: Sample ID must be the rowname/colname in both dataset')
+  }
   
   if(sample_in_row == F){
     microdat <- t(microdat) %>% as.data.frame()
