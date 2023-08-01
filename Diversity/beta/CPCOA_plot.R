@@ -1,7 +1,6 @@
-# Jialin He 202306
+# Jialin He 202308
 
 CPCOA_plot <- function(microdat,metadata,group,
-                       sample_in_row = T,
                        distance = 'bray',
                        parallel = 4,
                        title = NULL,
@@ -15,6 +14,20 @@ CPCOA_plot <- function(microdat,metadata,group,
   
   if(!require(pacman))install.packages(pacman)
   pacman::p_load(tidyverse,vegan,car,ggthemes,scico)
+
+  if(sum(sapply(microdat,is.numeric))!=ncol(microdat)){
+    stop('ERROR: Only numeric values can be included in the microdat')
+  }
+  
+  if(sum(row.names(metadata) %in% row.names(microdat))>0){
+    sample_in_row = T
+    print('Sample ID in row')
+  }else if(sum(row.names(metadata) %in% colnames(microdat))>0){
+    sample_in_row = F
+    print('Sample ID in col')
+  }else{
+    stop('ERROR: Sample ID must be the rowname/colname in both dataset')
+  }
   
   if(sample_in_row == F){
     microdat <- t(microdat) %>% as.data.frame()
