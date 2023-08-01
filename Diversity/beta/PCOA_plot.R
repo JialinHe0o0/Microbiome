@@ -1,7 +1,6 @@
 # Jialin He edited in 202306
 
 PCOA_plot <- function(microdat,metadata,group,
-                      sample_in_row = T,
                       signif_method = 'adonis',
                       distance = 'bray',
                       parallel =4,
@@ -16,6 +15,20 @@ PCOA_plot <- function(microdat,metadata,group,
   if(!require(pacman))install.packages(pacman)
   pacman::p_load(tidyverse,ggpubr,vegan,car,ggthemes,scico)
 
+  if(sum(sapply(microdat,is.numeric))!=ncol(microdat)){
+    stop('ERROR: Only numeric values can be included in the microdat')
+  }
+  
+  if(sum(row.names(metadata) %in% row.names(microdat))>0){
+    sample_in_row = T
+    print('Sample ID in row')
+  }else if(sum(row.names(metadata) %in% colnames(microdat))>0){
+    sample_in_row = F
+    print('Sample ID in col')
+  }else{
+    stop('ERROR: Sample ID must be the rowname/colname in both dataset')
+  }
+  
   if(sample_in_row == F){
     microdat <- t(microdat) %>% as.data.frame()
   }
