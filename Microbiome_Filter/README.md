@@ -33,7 +33,7 @@ res$dat
 abun_filter(dat, # 物种丰度矩阵
             sample_in_row = T, # T or F，T即特征表row.names为sample ID
             count = F, # 是否是count数据
-            abundance = 0.001) # 平均丰度>0.001
+            abundance = 0.001) # 平均丰度>=0.001
 ```
 
 example
