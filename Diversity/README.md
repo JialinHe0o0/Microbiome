@@ -4,8 +4,6 @@
 
 \# 练习时长两年半，报错了必须是你的问题 o.0
 
-\# 我不信哥哥会塌房，生物老师没教过你生殖隔离吗？
-
 ## diversity-code
 
 \# **metadata的row.names必须为sample ID**
