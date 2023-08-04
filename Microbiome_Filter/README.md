@@ -51,26 +51,27 @@ res <- abun_filter(tss_g, sample_in_row = T, count = F, abundance = 0.001)
 
 一般而言，筛出高丰度/高检出率物种后，做组间差异分析
 
-## DA_multi()
+## DA_test()
 
-基于ANOVA或Kruskal.Wallis的多组差异比较
+2组： t.test或wilcox
+3组或以上: ANOVA或Kruskal.Wallis
 
 ```ruby
-DA_multi(microdata = , # 物种丰度矩阵，必须是标准化后的data
-         metadata = , # clinical data
-         group = , # 分组变量名称
-         parametric_test=F，# 是否非参数检验
-         cutoff_padj=0.05) # 校正后P值的切点
+DA_test(microdata = , # 物种丰度矩阵，必须是标准化后的data
+        metadata = , # clinical data
+        group = , # 分组变量名称
+        parametric_test=F，# 是否非参数检验
+        cutoff_padj=0.05) # 校正后P值的切点
 ```
 
 example
 
 ```ruby
-res <- DA_multi(microdat = dat_filter,
-                metadata = metadata,
-                group = 'Group',
-                parametric_test = F，
-                cutoff_padj=0.05)
+res <- DA_test(microdat = dat_filter,
+               metadata = metadata,
+               group = 'Group',
+               parametric_test = F，
+               cutoff_padj=0.05)
 ```
 
 
