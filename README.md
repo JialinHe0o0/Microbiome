@@ -4,6 +4,15 @@
 
 Alpha and beta diversity
 
+<img src="https://github.com/JialinHe0o0/plot/blob/main/diversity_plot/PCoA_plot.png" width="50%" height="50%">
+
+<img src="https://github.com/JialinHe0o0/plot/blob/main/diversity_plot/PCoA_plus_plot.png" width="50%" height="50%">
+
+<img src="https://github.com/JialinHe0o0/plot/blob/main/diversity_plot/NMDS_plot.png" width="50%" height="50%">
+
+<img src="https://github.com/JialinHe0o0/plot/blob/main/diversity_plot/CPCoA_plot.png" width="50%" height="50%">
+
+
 - [**Explanatory_power**](https://github.com/JialinHe0o0/Microbiome/tree/main/Explanatory_Power)
 
 表型与微生物群落变化的关联以及解释度
