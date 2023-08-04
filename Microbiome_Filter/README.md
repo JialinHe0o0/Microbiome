@@ -75,8 +75,12 @@ res <- DA_test(microdat = dat_filter,
                group = 'Group',
                parametric_test = F，
                cutoff_padj=0.05)
+res
 ```
-
+|taxo|pvalue|p_adj|
+|---|---|---|
+|a菌|0.003|0.006|
+|b菌|0.009|0.009|
 
 
 
