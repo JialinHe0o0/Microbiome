@@ -1,5 +1,11 @@
 # Jialin He
 
+\# To be continued
+
+\# 这里展示的是分析方法的沧海一粟
+
+\# 报错了必须是你的问题！
+
 - [**Diversity**](https://github.com/JialinHe0o0/Microbiome/tree/main/Diversity)
 
 Alpha and beta diversity
