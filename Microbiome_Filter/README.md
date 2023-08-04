@@ -55,7 +55,7 @@ res <- abun_filter(tss_g, sample_in_row = T, count = F, abundance = 0.001)
 
 最简单的差异分析方法
 
-2组： t.test或wilcox
+2组： t.test或wilcox.test
 
 3组或以上: ANOVA或Kruskal.Wallis
 
