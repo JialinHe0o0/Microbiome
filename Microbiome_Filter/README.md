@@ -63,7 +63,7 @@ res <- abun_filter(tss_g, sample_in_row = T, count = F, abundance = 0.001)
 DA_test(microdata = , # 物种丰度矩阵，必须是标准化后的data
         metadata = , # clinical data
         group = , # 分组变量名称
-        parametric_test=F，# 是否非参数检验
+        parametric_test=F，# 是否参数检验
         cutoff_padj=0.05) # 校正后P值的切点
 ```
 
