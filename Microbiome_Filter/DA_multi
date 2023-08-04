@@ -1,0 +1,74 @@
+# Jialin He 202308
+## 简略版本
+DA_multi <- function(microdat,
+                     metadata,
+                     group,
+                     parametric_test=F,
+                     cutoff_padj=0.05){
+  
+  if(!require(pacman))install.packages(pacman)
+  pacman::p_load(tidyverse)
+  
+  if(sum(sapply(microdat,is.numeric))!=ncol(microdat)){
+    stop('ERROR: Only numeric values can be included in the microdat')
+  }
+  
+  if(sum(row.names(metadata) %in% row.names(microdat))>0){
+    sample_in_row = T
+    print('Sample ID in row')
+  }else if(sum(row.names(metadata) %in% colnames(microdat))>0){
+    sample_in_row = F
+    print('Sample ID in col')
+  }else{
+    stop('ERROR: Sample ID must be the rowname/colname in both dataset')
+  }
+  
+  if(sample_in_row == F){
+    microdat <- t(microdat) %>% as.data.frame()
+  }
+  
+  metadata <- metadata[row.names(metadata) %in% row.names(microdat),]
+  id <- row.names(metadata)
+  microdat <- microdat[id,]
+  
+  colnames(metadata)[colnames(metadata)==group] <- 'group_in_function'
+  
+  if(!is.factor(metadata$group_in_function)){
+    metadata$group_in_functionx <- as.factor(metadata$group_in_function)
+  }
+  
+  if(length(levels(metadata$group_in_function))<=2)stop('ERROR: You need at least 3 levels in the group')
+  
+  if(parametric_test){
+    # 方差分析
+    av <- function(x){
+      res <- aov(x~metadata$group_in_function)
+      p <-summary(res)[[1]][1,5]
+      return(p)
+    }
+    pvalue <- sapply(microdat,av)
+    pair_method='t.test'
+  }else{
+    # kruskal.wallis
+    kw <- function(x){
+      res <- kruskal.test(x~metadata$group_in_function)
+      p <- res$p.value
+      return(p)
+    }
+    pvalue <- sapply(microdat,kw)
+    pair_method='wilcox.test'
+  }
+  
+  dat <- data.frame(txao = colnames(microdat),
+                    pvalue = pvalue)
+  dat$p_adj <- p.adjust(dat$pvalue,'BH')
+  
+  print(paste0('Number of significant taxo: ',sum(dat$p_adj<cutoff_padj)))
+  
+  return(dat)
+}
+
+
+
+
+
