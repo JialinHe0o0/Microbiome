@@ -1,13 +1,13 @@
 # Jialin He 202308
-## 简略版本
-DA_multi <- function(microdat,
-                     metadata,
-                     group,
-                     parametric_test=F,
-                     cutoff_padj=0.05){
+## 简化版
+DA_test <- function(microdat,
+                    metadata,
+                    group,
+                    parametric_test=F,
+                    cutoff_padj=0.05){
   
   if(!require(pacman))install.packages(pacman)
-  pacman::p_load(tidyverse)
+  pacman::p_load(tidyverse,ggpubr,rstatix,agricolae)
   
   if(sum(sapply(microdat,is.numeric))!=ncol(microdat)){
     stop('ERROR: Only numeric values can be included in the microdat')
@@ -34,29 +34,52 @@ DA_multi <- function(microdat,
   colnames(metadata)[colnames(metadata)==group] <- 'group_in_function'
   
   if(!is.factor(metadata$group_in_function)){
-    metadata$group_in_functionx <- as.factor(metadata$group_in_function)
+    metadata$group_in_function <- as.factor(metadata$group_in_function)
   }
   
-  if(length(levels(metadata$group_in_function))<=2)stop('ERROR: You need at least 3 levels in the group')
+  len <- length(levels(metadata$group_in_function))
   
-  if(parametric_test){
-    # 方差分析
-    av <- function(x){
-      res <- aov(x~metadata$group_in_function)
-      p <-summary(res)[[1]][1,5]
-      return(p)
+  if(len==2){
+    if(parametric_test){
+      # t.test
+      ttest <- function(x){
+        res <- t.test(x~metadata$group_in_function)
+        p <-res$p.value
+        return(p)
+      }
+      pvalue <- sapply(microdat,ttest)
+    }else{
+      # wilcox.test
+      wilcox <- function(x){
+        res <- wilcox.test(x~metadata$group_in_function)
+        p <- res$p.value
+        return(p)
+      }
+      pvalue <- sapply(microdat,wilcox)
     }
-    pvalue <- sapply(microdat,av)
-    pair_method='t.test'
+  }else if(len>=3){
+    if(parametric_test){
+      # 方差分析
+      av <- function(x){
+        res <- aov(x~metadata$group_in_function)
+        p <-summary(res)[[1]][1,5]
+        return(p)
+      }
+      pvalue <- sapply(microdat,av)
+      pair_method='t.test'
+    }else{
+      # kruskal.wallis
+      kw <- function(x){
+        res <- kruskal.test(x~metadata$group_in_function)
+        p <- res$p.value
+        return(p)
+      }
+      pvalue <- sapply(microdat,kw)
+      pair_method='wilcox.test'
+    }
+    
   }else{
-    # kruskal.wallis
-    kw <- function(x){
-      res <- kruskal.test(x~metadata$group_in_function)
-      p <- res$p.value
-      return(p)
-    }
-    pvalue <- sapply(microdat,kw)
-    pair_method='wilcox.test'
+    stop('ERROR: Just one level in the group')
   }
   
   dat <- data.frame(txao = colnames(microdat),
