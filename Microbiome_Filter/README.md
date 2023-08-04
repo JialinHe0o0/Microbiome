@@ -53,7 +53,10 @@ res <- abun_filter(tss_g, sample_in_row = T, count = F, abundance = 0.001)
 
 ## DA_test()
 
+最简单的差异分析方法
+
 2组： t.test或wilcox
+
 3组或以上: ANOVA或Kruskal.Wallis
 
 ```ruby
