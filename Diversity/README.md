@@ -171,6 +171,7 @@ res
 
 \# 又是plus嘻嘻嘻
 
-<img src="https://github.com/JialinHe0o0/plot/blob/main/diversity_plot/beta1.png" width="38%">
-<img src="https://github.com/JialinHe0o0/plot/blob/main/diversity_plot/beta2.png" width="38%">
-
+<p>
+<img src="https://github.com/JialinHe0o0/plot/blob/main/diversity_plot/beta1.png" width="39%">
+<img src="https://github.com/JialinHe0o0/plot/blob/main/diversity_plot/beta2.png" width="39%">
+</p>
