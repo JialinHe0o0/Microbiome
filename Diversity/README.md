@@ -81,19 +81,20 @@ res <- PCOA_plot(css_g,metadata,group = 'test',
 
 res$plot
 ```
-![PCoA](https://github.com/JialinHe0o0/plot/blob/main/diversity_plot/PCoA_plot.png)
+
+<img src="https://github.com/JialinHe0o0/plot/blob/main/diversity_plot/PCoA_plot.png" width="50%">
 
 - **bray_dissimilarity()**
 
 嘻嘻，你觉得相异距离只能用主成分展示吗
 
-![bray-curtis](https://github.com/JialinHe0o0/plot/blob/main/diversity_plot/bray_curtis_plot.png)
+<img src="https://github.com/JialinHe0o0/plot/blob/main/diversity_plot/bray_curtis_plot.png" width="50%">
 
 - **PCoA_plus()**
 
   \# 你猜我放哪了
 
-![](https://github.com/JialinHe0o0/plot/blob/main/diversity_plot/PCoA_plus_plot.png)
+<img src="https://github.com/JialinHe0o0/plot/blob/main/diversity_plot/PCoA_plus_plot.png" width="50%">
 
 - **NMDS()**
 
@@ -128,7 +129,8 @@ res <- NMDS(css_g,metadata,group = 'test',
 
 res
 ```
-![NMDS](https://github.com/JialinHe0o0/plot/blob/main/diversity_plot/NMDS_plot.png)
+
+<img src="https://github.com/JialinHe0o0/plot/blob/main/diversity_plot/NMDS_plot.png" width="50%">
 
 
 \# 限制性，类似于有监督
@@ -158,7 +160,8 @@ res <- CPCOA_plot(css_g,metadata,group = 'test',
 
 res
 ```
-![CPCoA](https://github.com/JialinHe0o0/plot/blob/main/diversity_plot/CPCoA_plot.png)
+
+<img src="https://github.com/JialinHe0o0/plot/blob/main/diversity_plot/CPCoA_plot.png" width="50%">
 
 - **beta_plus()**
 
@@ -168,6 +171,6 @@ res
 
 \# 又是plus嘻嘻嘻
 
-![turnover](https://github.com/JialinHe0o0/plot/blob/main/diversity_plot/beta1.png)
-![nestedness](https://github.com/JialinHe0o0/plot/blob/main/diversity_plot/beta2.png)
+<img src="https://github.com/JialinHe0o0/plot/blob/main/diversity_plot/beta1.png" width="38%">
+<img src="https://github.com/JialinHe0o0/plot/blob/main/diversity_plot/beta2.png" width="38%">
 
