@@ -89,7 +89,7 @@ res$plot
 
 - **bray_dissimilarity()**
 
-嘻嘻，你觉得相异距离只能用主成分展示吗
+嘻嘻，相异距离只能用主成分展示吗
 
 <img src="https://github.com/JialinHe0o0/plot/blob/main/diversity_plot/bray_curtis_plot.png" width="50%">
 
