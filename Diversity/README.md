@@ -47,6 +47,9 @@ res$data
 # 返回ggplot图
 res$plot
 ```
+
+<img src="https://github.com/JialinHe0o0/plot/blob/main/diversity_plot/alpha_plot.png" width="50%">
+
 ----
 
 ### β多样性
