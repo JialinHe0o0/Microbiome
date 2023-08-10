@@ -4,6 +4,8 @@
 
 \# 练习时长两年半，报错了必须是你的问题 o.0
 
+\# 你怎么知道我抽到了卡芙卡！
+
 ## diversity-code
 
 \# **metadata的row.names必须为sample ID**
